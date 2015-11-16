@@ -24564,7 +24564,7 @@ _reactDom2.default.render(_react2.default.createElement(
 
 console.log("Script working");
 
-},{"./routes":231,"./store":232,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],229:[function(require,module,exports){
+},{"./routes":232,"./store":233,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],229:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24625,17 +24625,44 @@ exports.default = Home;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 /**
  * Created by dav on 2015-11-16.
  */
 
 exports.default = function () {
-  return {};
+    return {
+        authentication: false
+    };
 };
 
 },{}],231:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _initialState = require('./../initialState');
+
+var _initialState2 = _interopRequireDefault(_initialState);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var authentication = function authentication(state, action) {
+    var newState = Object.assign({}, state);
+    switch (action) {
+        default:
+            return state || (0, _initialState2.default)().authentication;
+    }
+}; /**
+    * Created by dav on 2015-11-16.
+    */
+
+exports.default = authentication();
+
+},{"./../initialState":230}],232:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24660,7 +24687,7 @@ exports.default = _react2.default.createElement(_reactRouter.Route, { path: '/',
                                                                                                                 * Created by dav on 2015-11-16.
                                                                                                                 */
 
-},{"./components/home":229,"react":218,"react-router":56}],232:[function(require,module,exports){
+},{"./components/home":229,"react":218,"react-router":56}],233:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24673,19 +24700,20 @@ var _initialState = require('./initialState');
 
 var _initialState2 = _interopRequireDefault(_initialState);
 
+var _authentication = require('./reducers/authentication');
+
+var _authentication2 = _interopRequireDefault(_authentication);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created by dav on 2015-11-16.
- */
-
-var todoReducer = {};
 var reducers = (0, _redux.combineReducers)({
-  futureReducer: todoReducer
-});
+  authReducer: _authentication2.default
+}); /**
+     * Created by dav on 2015-11-16.
+     */
 
 var store = (0, _redux.createStore)(reducers, (0, _initialState2.default)());
 
 exports.default = store;
 
-},{"./initialState":230,"redux":220}]},{},[228]);
+},{"./initialState":230,"./reducers/authentication":231,"redux":220}]},{},[228]);
