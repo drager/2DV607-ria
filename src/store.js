@@ -3,7 +3,7 @@
  */
 import { combineReducers, createStore } from 'redux'
 import initialState from './initialState';
-import authReducer from './reducers/authentication'
+import authReducer from './reducers/authenticate'
 const reducers = combineReducers({
     authReducer : authReducer
 });

@@ -24652,7 +24652,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var authentication = function authentication(state, action) {
     var newState = Object.assign({}, state);
+    //Todo: add action type here after component implemented.
     switch (action) {
+        // Todo: add action type here for clicking login.
         default:
             return state || (0, _initialState2.default)().authentication;
     }
@@ -24700,14 +24702,14 @@ var _initialState = require('./initialState');
 
 var _initialState2 = _interopRequireDefault(_initialState);
 
-var _authentication = require('./reducers/authentication');
+var _authenticate = require('./reducers/authenticate');
 
-var _authentication2 = _interopRequireDefault(_authentication);
+var _authenticate2 = _interopRequireDefault(_authenticate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducers = (0, _redux.combineReducers)({
-  authReducer: _authentication2.default
+  authReducer: _authenticate2.default
 }); /**
      * Created by dav on 2015-11-16.
      */
@@ -24716,4 +24718,4 @@ var store = (0, _redux.createStore)(reducers, (0, _initialState2.default)());
 
 exports.default = store;
 
-},{"./initialState":230,"./reducers/authentication":231,"redux":220}]},{},[228]);
+},{"./initialState":230,"./reducers/authenticate":231,"redux":220}]},{},[228]);
