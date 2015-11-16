@@ -4,7 +4,7 @@
   "description": "react project for course in react+redux",
   "main": "boundle.js",
   "scripts": {
-    "test": "run test"
+    "build": "browserify -t [ babelify --presets [ react es2015 ] ] src/app.js -o bundle.js"
   },
   "repository": {
     "type": "git",
