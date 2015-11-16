@@ -1,8 +1,9 @@
 import React from 'react.'
-import ReactDom from 'react-dom'
+import actions from '../actions'
+import { connect } from 'react-redux'
 
 class Authenticate extends React.Component{
-
+    this.props.authentication;
     render(){
         const login = this.props;
         return(
@@ -15,7 +16,9 @@ class Authenticate extends React.Component{
 
     propTypes : {
             login : React.PropTypes.func.isRequired
-        }
+        };
+    //TODO Continue here, implement so state can be connnected to store on change.
+    const mapStateToProps = (state) => state.authentication;
 }
 
-export default Authenticate
+export default connect()(Authenticate)
