@@ -1,0 +1,38 @@
+{
+  "name": "myreactproject",
+  "version": "0.0.1",
+  "description": "react project for course in react+redux",
+  "main": "boundle.js",
+  "scripts": {
+    "test": "run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grenmyr/2DV607-ria.git"
+  },
+  "keywords": [
+    "react",
+    "javascript",
+    "redux"
+  ],
+  "author": "David Grenmyr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Grenmyr/2DV607-ria/issues"
+  },
+  "homepage": "https://github.com/Grenmyr/2DV607-ria#readme",
+  "dependencies": {
+    "history": "^1.13.1",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "react-redux": "^4.0.0",
+    "react-router": "^1.0.0",
+    "redux": "^3.0.4"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1"
+  }
+}
