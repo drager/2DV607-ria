@@ -1,10 +1,12 @@
-import React from 'react.'
+import React from 'react'
 import actions from '../actions'
 import { connect } from 'react-redux'
 
 class Authenticate extends React.Component{
-    this.props.authentication;
+
+
     render(){
+        Console.log(this);
         const login = this.props;
         return(
             <div>
@@ -13,12 +15,15 @@ class Authenticate extends React.Component{
             </div>
         )
     }
-
-    propTypes : {
-            login : React.PropTypes.func.isRequired
-        };
-    //TODO Continue here, implement so state can be connnected to store on change.
-    const mapStateToProps = (state) => state.authentication;
 }
 
-export default connect()(Authenticate)
+console.log(Authenticate);
+
+Authenticate.propTypes  = {
+    login : React.PropTypes.func.isRequired
+};
+
+//TODO Continue here, implement so state can be connnected to store on change.
+const mapStateToProps = (state) => state.authentication;
+
+export default connect(mapStateToProps)(Authenticate)
