@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import actions from '../actions'
 import { connect } from 'react-redux'
+import { Link }  from 'react-router'
 
 class Authenticate extends Component{
 
@@ -11,8 +12,7 @@ class Authenticate extends Component{
         const { login, logout, isLoggedIn } = this.props;
         return(
             <div>
-                <h2>LoginView</h2>
-
+                <p><Link to="/">To home view</Link></p>
                 {isLoggedIn ? (
                     <div>
                         <h4>Want to log out?</h4>

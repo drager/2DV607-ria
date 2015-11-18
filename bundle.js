@@ -24584,7 +24584,7 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(_reactRouter.Router, { routes: _routes2.default })
 ), document.getElementById('app'));
 
-},{"./routes":235,"./store":236,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],230:[function(require,module,exports){
+},{"./routes":234,"./store":235,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],230:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24602,6 +24602,8 @@ var _actions = require('../actions');
 var _actions2 = _interopRequireDefault(_actions);
 
 var _reactRedux = require('react-redux');
+
+var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24622,6 +24624,9 @@ var Authenticate = (function (_Component) {
 
     _createClass(Authenticate, [{
         key: 'render',
+
+        //Todo: implement an service class for faking auth.
+
         value: function render() {
             // isLoggedIn is injected from the store and has a dependency to action.js
             var _props = this.props;
@@ -24635,7 +24640,16 @@ var Authenticate = (function (_Component) {
                 _react2.default.createElement(
                     'h2',
                     null,
-                    'LoginView'
+                    'LoginView is nested inside home so both shows.'
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { to: '/' },
+                        'To home view'
+                    )
                 ),
                 isLoggedIn ? _react2.default.createElement(
                     'div',
@@ -24702,7 +24716,7 @@ var mapStateToProps = function mapStateToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(upstate, mapStateToProps)(Authenticate);
 
-},{"../actions":228,"react":218,"react-redux":30}],231:[function(require,module,exports){
+},{"../actions":228,"react":218,"react-redux":30,"react-router":56}],231:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24758,7 +24772,7 @@ var Home = (function (_Component) {
                     _react2.default.createElement(
                         _reactRouter.Link,
                         { to: '/auth' },
-                        'Login'
+                        'login view '
                     )
                 )
             );
@@ -24771,74 +24785,6 @@ var Home = (function (_Component) {
 exports.default = Home;
 
 },{"react":218,"react-router":56}],232:[function(require,module,exports){
-'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _authenticate = require('./authenticate');
-
-var _authenticate2 = _interopRequireDefault(_authenticate);
-
-var _reactRouter = require('react-router');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by dav on 2015-11-18.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-var Wrap = (function (_Component) {
-    _inherits(Wrap, _Component);
-
-    function Wrap() {
-        _classCallCheck(this, Wrap);
-
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(Wrap).apply(this, arguments));
-    }
-
-    _createClass(Wrap, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { id: 'wrap' },
-                _react2.default.createElement(
-                    'h1',
-                    null,
-                    'Testing to wrap authenticate component'
-                ),
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    _react2.default.createElement(
-                        _reactRouter.Link,
-                        { to: '/' },
-                        'Home'
-                    )
-                ),
-                _react2.default.createElement(_authenticate2.default, null)
-            );
-        }
-    }]);
-
-    return Wrap;
-})(_react.Component);
-
-exports.default = Wrap;
-
-},{"./authenticate":230,"react":218,"react-router":56}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24854,7 +24800,7 @@ exports.default = function () {
     };
 };
 
-},{}],234:[function(require,module,exports){
+},{}],233:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24889,7 +24835,7 @@ var authentication = function authentication(state, action) {
 
 exports.default = authentication;
 
-},{"./../initialState":233}],235:[function(require,module,exports){
+},{"./../initialState":232}],234:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24912,22 +24858,19 @@ var _authenticate = require('./components/authenticate');
 
 var _authenticate2 = _interopRequireDefault(_authenticate);
 
-var _wrap = require('./components/wrap');
-
-var _wrap2 = _interopRequireDefault(_wrap);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * Created by dav on 2015-11-16.
+ */
 exports.default = _react2.default.createElement(
     _reactRouter.Route,
-    { path: '/', component: _wrap2.default },
-    _react2.default.createElement(_reactRouter.IndexRoute, { component: _home2.default }),
+    null,
+    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _home2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'auth', component: _authenticate2.default })
-); /**
-    * Created by dav on 2015-11-16.
-    */
+);
 
-},{"./components/authenticate":230,"./components/home":231,"./components/wrap":232,"react":218,"react-router":56}],236:[function(require,module,exports){
+},{"./components/authenticate":230,"./components/home":231,"react":218,"react-router":56}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24957,4 +24900,4 @@ var store = (0, _redux.createStore)(reducers, (0, _initialState2.default)());
 
 exports.default = store;
 
-},{"./initialState":233,"./reducers/authenticate":234,"redux":220}]},{},[229]);
+},{"./initialState":232,"./reducers/authenticate":233,"redux":220}]},{},[229]);
