@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import Authenticate from './authenticate'
+import { Link }  from 'react-router'
 
 export default class Wrap extends Component {
     render (){
@@ -10,7 +11,7 @@ export default class Wrap extends Component {
 
             <div id="wrap">
                 <h1>Testing to wrap authenticate component</h1>
-                <h4>Your current login status is</h4>
+                <p><Link to="/">Home</Link></p>
                 <Authenticate></Authenticate>
             </div>
         )

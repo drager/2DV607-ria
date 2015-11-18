@@ -16,7 +16,7 @@ const authentication = (state, action) =>{
             console.log(newState.isLoggedIn);
             return newState;
         default:
-        return state || initialState().authentication;
+        return state || initialState().loginState;
     }
 };
 

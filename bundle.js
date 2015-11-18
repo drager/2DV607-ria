@@ -24627,24 +24627,52 @@ var Authenticate = (function (_Component) {
             var _props = this.props;
             var login = _props.login;
             var logout = _props.logout;
+            var isLoggedIn = _props.isLoggedIn;
 
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(
-                    'h4',
+                    'h2',
                     null,
-                    'Login'
+                    'LoginView'
                 ),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: login },
-                    'Login'
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: logout },
-                    'Login'
+                isLoggedIn ? _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'h4',
+                        null,
+                        'Want to log out?'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: logout },
+                        'Logout'
+                    )
+                ) : _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'h4',
+                        null,
+                        'Want to login?'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: login },
+                        'Login'
+                    ),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement('input', { ref: 'email', placeholder: 'email', defaultValue: 'myEmail@mail.com' })
+                    ),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement('input', { ref: 'pass', placeholder: 'password' })
+                    )
                 )
             );
         }
@@ -24654,13 +24682,13 @@ var Authenticate = (function (_Component) {
 })(_react.Component);
 
 Authenticate.propTypes = {
-    login: _react.PropTypes.func.isRequired
+    login: _react.PropTypes.func.isRequired,
+    logout: _react.PropTypes.func.isRequired
 };
 
 var upstate = function upstate(state) {
-    return state.authentication;
+    return state.loginState;
 };
-//Todo last link to change state.
 var mapStateToProps = function mapStateToProps(dispatch) {
     return {
         login: function login() {
@@ -24759,6 +24787,8 @@ var _authenticate = require('./authenticate');
 
 var _authenticate2 = _interopRequireDefault(_authenticate);
 
+var _reactRouter = require('react-router');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24790,9 +24820,13 @@ var Wrap = (function (_Component) {
                     'Testing to wrap authenticate component'
                 ),
                 _react2.default.createElement(
-                    'h4',
+                    'p',
                     null,
-                    'Your current login status is'
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { to: '/' },
+                        'Home'
+                    )
                 ),
                 _react2.default.createElement(_authenticate2.default, null)
             );
@@ -24804,7 +24838,7 @@ var Wrap = (function (_Component) {
 
 exports.default = Wrap;
 
-},{"./authenticate":230,"react":218}],233:[function(require,module,exports){
+},{"./authenticate":230,"react":218,"react-router":56}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24816,7 +24850,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function () {
     return {
-        authentication: { isLoggedIn: false }
+        loginState: { isLoggedIn: false }
     };
 };
 
@@ -24847,7 +24881,7 @@ var authentication = function authentication(state, action) {
             console.log(newState.isLoggedIn);
             return newState;
         default:
-            return state || (0, _initialState2.default)().authentication;
+            return state || (0, _initialState2.default)().loginState;
     }
 }; /**
     * Created by dav on 2015-11-16.
@@ -24914,7 +24948,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Hidden string dependancy on naming of object to the object name located in the initialState.
 var reducers = (0, _redux.combineReducers)({
-  authentication: _authenticate2.default
+  loginState: _authenticate2.default
 }); /**
      * Created by dav on 2015-11-16.
      */

@@ -7,7 +7,7 @@ import authenticationReducer from './reducers/authenticate'
 
 // Hidden string dependancy on naming of object to the object name located in the initialState.
 const reducers = combineReducers({
-    authentication : authenticationReducer
+    loginState : authenticationReducer
 });
 
 const store = createStore(reducers, initialState());
