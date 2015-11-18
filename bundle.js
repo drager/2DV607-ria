@@ -24638,11 +24638,6 @@ var Authenticate = (function (_Component) {
                 'div',
                 null,
                 _react2.default.createElement(
-                    'h2',
-                    null,
-                    'LoginView is nested inside home so both shows.'
-                ),
-                _react2.default.createElement(
                     'p',
                     null,
                     _react2.default.createElement(
@@ -24817,14 +24812,10 @@ var authentication = function authentication(state, action) {
     var newState = Object.assign({}, state);
     switch (action.type) {
         case 'login':
-            console.log(newState.isLoggedIn);
             newState.isLoggedIn = true;
-            console.log(newState.isLoggedIn);
             return newState;
         case 'logout':
-            console.log(newState.isLoggedIn);
             newState.isLoggedIn = false;
-            console.log(newState.isLoggedIn);
             return newState;
         default:
             return state || (0, _initialState2.default)().loginState;
