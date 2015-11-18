@@ -3,6 +3,6 @@
  */
 export default () => {
     return {
-        authentication : false
+        authentication : { isLoggedIn : false }
     }
 };

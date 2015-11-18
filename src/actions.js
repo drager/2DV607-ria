@@ -2,9 +2,14 @@
  * Created by dav on 2015-11-16.
  */
 export default {
-    authenticate() {
+    login() {
         return {
-            type : 'authenticate'
+            type : 'login'
+        }
+    },
+    logout(){
+        return {
+            type: 'logout'
         }
     }
 }

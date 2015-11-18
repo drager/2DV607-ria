@@ -12,7 +12,7 @@ import store from './store'
 ReactDom.render(
 <Provider store={store}>
     <Router routes={routes}/>
-    </Provider>,
+</Provider>,
     document.getElementById('app')
 );
 

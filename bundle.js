@@ -24537,9 +24537,14 @@ Object.defineProperty(exports, "__esModule", {
  * Created by dav on 2015-11-16.
  */
 exports.default = {
-    authenticate: function authenticate() {
+    login: function login() {
         return {
-            type: 'authenticate'
+            type: 'login'
+        };
+    },
+    logout: function logout() {
+        return {
+            type: 'logout'
         };
     }
 };
@@ -24579,7 +24584,7 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(_reactRouter.Router, { routes: _routes2.default })
 ), document.getElementById('app'));
 
-},{"./routes":234,"./store":235,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],230:[function(require,module,exports){
+},{"./routes":235,"./store":236,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],230:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24606,8 +24611,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Authenticate = (function (_React$Component) {
-    _inherits(Authenticate, _React$Component);
+var Authenticate = (function (_Component) {
+    _inherits(Authenticate, _Component);
 
     function Authenticate() {
         _classCallCheck(this, Authenticate);
@@ -24618,8 +24623,11 @@ var Authenticate = (function (_React$Component) {
     _createClass(Authenticate, [{
         key: 'render',
         value: function render() {
-            Console.log(this);
-            var login = this.props;
+            // isLoggedIn is injected from the store and has a dependency to action.js
+            var _props = this.props;
+            var login = _props.login;
+            var logout = _props.logout;
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -24628,10 +24636,14 @@ var Authenticate = (function (_React$Component) {
                     null,
                     'Login'
                 ),
-                'h4>',
                 _react2.default.createElement(
                     'button',
                     { onClick: login },
+                    'Login'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: logout },
                     'Login'
                 )
             );
@@ -24639,29 +24651,28 @@ var Authenticate = (function (_React$Component) {
     }]);
 
     return Authenticate;
-})(_react2.default.Component);
-
-console.log(Authenticate);
+})(_react.Component);
 
 Authenticate.propTypes = {
-    login: _react2.default.PropTypes.func.isRequired
+    login: _react.PropTypes.func.isRequired
 };
 
-//TODO Continue here, implement so state can be connected to redux on change.
 var upstate = function upstate(state) {
     return state.authentication;
 };
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    console.log(_actions2.default.authenticate());
+//Todo last link to change state.
+var mapStateToProps = function mapStateToProps(dispatch) {
     return {
-        authentication: function authentication() {
-            dispatch(_actions2.default.authenticate());
+        login: function login() {
+            dispatch(_actions2.default.login());
+        },
+        logout: function logout() {
+            dispatch(_actions2.default.logout());
         }
     };
 };
 
-exports.default = (0, _reactRedux.connect)(upstate, mapDispatchToProps)(Authenticate);
+exports.default = (0, _reactRedux.connect)(upstate, mapStateToProps)(Authenticate);
 
 },{"../actions":228,"react":218,"react-redux":30}],231:[function(require,module,exports){
 'use strict';
@@ -24675,6 +24686,8 @@ Object.defineProperty(exports, "__esModule", {
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24710,6 +24723,15 @@ var Home = (function (_Component) {
                     'p',
                     null,
                     'Todo: implement a home component'
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { to: '/auth' },
+                        'Login'
+                    )
                 )
             );
         }
@@ -24720,7 +24742,69 @@ var Home = (function (_Component) {
 
 exports.default = Home;
 
-},{"react":218}],232:[function(require,module,exports){
+},{"react":218,"react-router":56}],232:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _authenticate = require('./authenticate');
+
+var _authenticate2 = _interopRequireDefault(_authenticate);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by dav on 2015-11-18.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+var Wrap = (function (_Component) {
+    _inherits(Wrap, _Component);
+
+    function Wrap() {
+        _classCallCheck(this, Wrap);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Wrap).apply(this, arguments));
+    }
+
+    _createClass(Wrap, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { id: 'wrap' },
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    'Testing to wrap authenticate component'
+                ),
+                _react2.default.createElement(
+                    'h4',
+                    null,
+                    'Your current login status is'
+                ),
+                _react2.default.createElement(_authenticate2.default, null)
+            );
+        }
+    }]);
+
+    return Wrap;
+})(_react.Component);
+
+exports.default = Wrap;
+
+},{"./authenticate":230,"react":218}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24732,11 +24816,11 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function () {
     return {
-        authentication: false
+        authentication: { isLoggedIn: false }
     };
 };
 
-},{}],233:[function(require,module,exports){
+},{}],234:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24751,12 +24835,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var authentication = function authentication(state, action) {
     var newState = Object.assign({}, state);
-    //Todo: add action type here after component implemented.
-    console.log(state);
-    console.log(action);
     switch (action.type) {
-        case 'authenticate':
-            newState.authentication = true;
+        case 'login':
+            console.log(newState.isLoggedIn);
+            newState.isLoggedIn = true;
+            console.log(newState.isLoggedIn);
+            return newState;
+        case 'logout':
+            console.log(newState.isLoggedIn);
+            newState.isLoggedIn = false;
+            console.log(newState.isLoggedIn);
             return newState;
         default:
             return state || (0, _initialState2.default)().authentication;
@@ -24767,7 +24855,7 @@ var authentication = function authentication(state, action) {
 
 exports.default = authentication;
 
-},{"./../initialState":232}],234:[function(require,module,exports){
+},{"./../initialState":233}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24790,18 +24878,22 @@ var _authenticate = require('./components/authenticate');
 
 var _authenticate2 = _interopRequireDefault(_authenticate);
 
+var _wrap = require('./components/wrap');
+
+var _wrap2 = _interopRequireDefault(_wrap);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created by dav on 2015-11-16.
- */
 exports.default = _react2.default.createElement(
     _reactRouter.Route,
-    { path: '/', component: _home2.default },
-    _react2.default.createElement(_reactRouter.Route, { path: '/auth', component: _authenticate2.default })
-);
+    { path: '/', component: _wrap2.default },
+    _react2.default.createElement(_reactRouter.IndexRoute, { component: _home2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: 'auth', component: _authenticate2.default })
+); /**
+    * Created by dav on 2015-11-16.
+    */
 
-},{"./components/authenticate":230,"./components/home":231,"react":218,"react-router":56}],235:[function(require,module,exports){
+},{"./components/authenticate":230,"./components/home":231,"./components/wrap":232,"react":218,"react-router":56}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24831,4 +24923,4 @@ var store = (0, _redux.createStore)(reducers, (0, _initialState2.default)());
 
 exports.default = store;
 
-},{"./initialState":232,"./reducers/authenticate":233,"redux":220}]},{},[229]);
+},{"./initialState":233,"./reducers/authenticate":234,"redux":220}]},{},[229]);

@@ -4,10 +4,16 @@
 import initialState from './../initialState'
 const authentication = (state, action) =>{
     const newState = Object.assign({}, state);
-    //Todo: add action type here after component implemented.
     switch(action.type){
-        case 'authenticate':
-            newState.authentication = true;
+        case 'login':
+            console.log(newState.isLoggedIn);
+            newState.isLoggedIn = true;
+            console.log(newState.isLoggedIn);
+            return newState;
+        case 'logout':
+            console.log(newState.isLoggedIn);
+            newState.isLoggedIn = false;
+            console.log(newState.isLoggedIn);
             return newState;
         default:
         return state || initialState().authentication;
