@@ -23,7 +23,16 @@ Authenticate.propTypes  = {
     login : React.PropTypes.func.isRequired
 };
 
-//TODO Continue here, implement so state can be connnected to store on change.
-const mapStateToProps = (state) => state.authentication;
+//TODO Continue here, implement so state can be connected to redux on change.
+const upstate = (state) => state.authentication;
 
-export default connect(mapStateToProps)(Authenticate)
+const mapDispatchToProps = (dispatch) => {
+    console.log(actions.authenticate());
+    return {
+        authentication() {
+            dispatch(actions.authenticate());
+        }
+    }
+};
+
+export default connect(upstate, mapDispatchToProps)(Authenticate)

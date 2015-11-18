@@ -18,4 +18,3 @@ ReactDom.render(
 
 
 
-console.log("Script working");

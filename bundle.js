@@ -24579,8 +24579,6 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(_reactRouter.Router, { routes: _routes2.default })
 ), document.getElementById('app'));
 
-console.log("Script working");
-
 },{"./routes":234,"./store":235,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],230:[function(require,module,exports){
 'use strict';
 
@@ -24649,12 +24647,21 @@ Authenticate.propTypes = {
     login: _react2.default.PropTypes.func.isRequired
 };
 
-//TODO Continue here, implement so state can be connnected to store on change.
-var mapStateToProps = function mapStateToProps(state) {
+//TODO Continue here, implement so state can be connected to redux on change.
+var upstate = function upstate(state) {
     return state.authentication;
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(Authenticate);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    console.log(_actions2.default.authenticate());
+    return {
+        authentication: function authentication() {
+            dispatch(_actions2.default.authenticate());
+        }
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(upstate, mapDispatchToProps)(Authenticate);
 
 },{"../actions":228,"react":218,"react-redux":30}],231:[function(require,module,exports){
 'use strict';
@@ -24745,8 +24752,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var authentication = function authentication(state, action) {
     var newState = Object.assign({}, state);
     //Todo: add action type here after component implemented.
-    switch (action) {
-        // Todo: add action type here for clicking login.
+    console.log(state);
+    console.log(action);
+    switch (action.type) {
+        case 'authenticate':
+            newState.authentication = true;
+            return newState;
         default:
             return state || (0, _initialState2.default)().authentication;
     }
@@ -24754,7 +24765,7 @@ var authentication = function authentication(state, action) {
     * Created by dav on 2015-11-16.
     */
 
-exports.default = authentication();
+exports.default = authentication;
 
 },{"./../initialState":232}],234:[function(require,module,exports){
 'use strict';
@@ -24809,8 +24820,9 @@ var _authenticate2 = _interopRequireDefault(_authenticate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Hidden string dependancy on naming of object to the object name located in the initialState.
 var reducers = (0, _redux.combineReducers)({
-  authReducer: _authenticate2.default
+  authentication: _authenticate2.default
 }); /**
      * Created by dav on 2015-11-16.
      */
