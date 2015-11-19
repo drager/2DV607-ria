@@ -1,58 +1,26 @@
-import React, { Component, PropTypes } from 'react'
-import actions from '../actions'
+/**
+ * Created by dav on 2015-11-19.
+ */
+import actions from '../actions/loginActions'
 import { connect } from 'react-redux'
-import { Link }  from 'react-router'
+import store from '../store'
+import userAction from '../actions/userActions'
+import removeSoon from '../actions/loginActions'
 
+//Todo implement login and logout as when submit.js make a submit, that this class check if its valid data
 
-
-class Authenticate extends Component{
-    // On submit extract email and password from this.
-      handleSubmit() {
-          const email = this.refs.email.value;
-          const pass = this.refs.password.value;
-    }
-
-    render(){
-        // isLoggedIn is injected from the store and has a dependency to action.js
-        const {logout, isLoggedIn } = this.props;
-        return(
-            <div>
-                <p><Link to="/">To home view</Link></p>
-                {isLoggedIn ? (
-                    <div>
-                        <h4>Want to log out?</h4>
-                        <button onClick={logout}>Logout</button>
-                    </div>
-                ) : (
-                    <div>
-                        <h4>Want to login?</h4>
-                        <form onSubmit={ () => this.handleSubmit()}>
-                            <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
-                            <label><input ref="password" placeholder="password" /></label>
-                            <button type="submit">login</button>
-                        </form>
-                    </div>
-                )}
-            </div>
-        )
-    }
-}
-
-Authenticate.propTypes  = {
-    login : PropTypes.func.isRequired,
-    logout : PropTypes.func.isRequired
-};
-
-const upstate = (state) => state.loginState;
+const upstate = (state) => state.userState;
 const mapStateToProps = (dispatch) => {
     return {
         login() {
+            console.log("Run login");
             dispatch(actions.login());
         },
         logout() {
+            console.log("Run logout");
             dispatch(actions.logout());
         }
     }
 };
 
-export default connect( upstate, mapStateToProps)(Authenticate)
+export default connect( upstate, mapStateToProps)

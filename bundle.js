@@ -24552,7 +24552,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 /**
- * Created by dav on 2015-11-16.
+ * Created by dav on 2015-11-19.
  */
 exports.default = {
     login: function login() {
@@ -24568,6 +24568,23 @@ exports.default = {
 };
 
 },{}],230:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Created by dav on 2015-11-19.
+ */
+exports.default = {
+    submitUser: function submitUser() {
+        return {
+            type: 'submitUser'
+        };
+    }
+};
+
+},{}],231:[function(require,module,exports){
 'use strict';
 
 var _reactDom = require('react-dom');
@@ -24602,149 +24619,53 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(_reactRouter.Router, { routes: _routes2.default })
 ), document.getElementById('app'));
 
-},{"./routes":235,"./store":236,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],231:[function(require,module,exports){
+},{"./routes":238,"./store":239,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],232:[function(require,module,exports){
 'use strict';
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _react = require('react');
+var _loginActions = require('../actions/loginActions');
 
-var _react2 = _interopRequireDefault(_react);
-
-var _actions = require('../actions');
-
-var _actions2 = _interopRequireDefault(_actions);
+var _loginActions2 = _interopRequireDefault(_loginActions);
 
 var _reactRedux = require('react-redux');
 
-var _reactRouter = require('react-router');
+var _store = require('../store');
+
+var _store2 = _interopRequireDefault(_store);
+
+var _userActions = require('../actions/userActions');
+
+var _userActions2 = _interopRequireDefault(_userActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Authenticate = (function (_Component) {
-    _inherits(Authenticate, _Component);
-
-    function Authenticate() {
-        _classCallCheck(this, Authenticate);
-
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(Authenticate).apply(this, arguments));
-    }
-
-    _createClass(Authenticate, [{
-        key: 'handleSubmit',
-
-        // On submit extract email and password from this.
-        value: function handleSubmit() {
-            console.log(this);
-            var email = this.refs.email.value;
-            var pass = this.refs.password.value;
-            console.log(email);
-            console.log(pass);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            // isLoggedIn is injected from the store and has a dependency to action.js
-            var _props = this.props;
-            var logout = _props.logout;
-            var isLoggedIn = _props.isLoggedIn;
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    _react2.default.createElement(
-                        _reactRouter.Link,
-                        { to: '/' },
-                        'To home view'
-                    )
-                ),
-                isLoggedIn ? _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                        'h4',
-                        null,
-                        'Want to log out?'
-                    ),
-                    _react2.default.createElement(
-                        'button',
-                        { onClick: logout },
-                        'Logout'
-                    )
-                ) : _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                        'h4',
-                        null,
-                        'Want to login?'
-                    ),
-                    _react2.default.createElement(
-                        'form',
-                        { onSubmit: function onSubmit() {
-                                return _this2.handleSubmit();
-                            } },
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { ref: 'email', placeholder: 'email', defaultValue: 'joe@example.com' })
-                        ),
-                        _react2.default.createElement(
-                            'label',
-                            null,
-                            _react2.default.createElement('input', { ref: 'password', placeholder: 'password' })
-                        ),
-                        _react2.default.createElement(
-                            'button',
-                            { type: 'submit' },
-                            'login'
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Authenticate;
-})(_react.Component);
-
-Authenticate.propTypes = {
-    login: _react.PropTypes.func.isRequired,
-    logout: _react.PropTypes.func.isRequired
-};
+//Todo implement login and logout as when submit.js make a submit, that this class check if its valid data
 
 var upstate = function upstate(state) {
-    return state.loginState;
-};
+    return state.userState;
+}; /**
+    * Created by dav on 2015-11-19.
+    */
+
 var mapStateToProps = function mapStateToProps(dispatch) {
     return {
         login: function login() {
-            dispatch(_actions2.default.login());
+            console.log("Run login");
+            dispatch(_loginActions2.default.login());
         },
         logout: function logout() {
-            dispatch(_actions2.default.logout());
+            console.log("Run logout");
+            dispatch(_loginActions2.default.logout());
         }
     };
 };
 
-exports.default = (0, _reactRedux.connect)(upstate, mapStateToProps)(Authenticate);
+exports.default = (0, _reactRedux.connect)(upstate, mapStateToProps);
 
-},{"../actions":229,"react":218,"react-redux":30,"react-router":56}],232:[function(require,module,exports){
+},{"../actions/loginActions":229,"../actions/userActions":230,"../store":239,"react-redux":30}],233:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24758,6 +24679,8 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
+
+var _reactRedux = require('react-redux');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24768,6 +24691,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Created by dav on 2015-11-16.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        loginState: state.loginState,
+        userState: state.userState
+    };
+};
 
 var Home = (function (_Component) {
     _inherits(Home, _Component);
@@ -24802,6 +24732,33 @@ var Home = (function (_Component) {
                         { to: '/auth' },
                         'login view '
                     )
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'UserName : ',
+                    this.props.userState.username
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'Email : ',
+                    this.props.userState.email
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    'Password : ',
+                    this.props.userState.password
+                ),
+                this.props.loginState.isLoggedIn ? _react2.default.createElement(
+                    'h4',
+                    null,
+                    'You are logged in'
+                ) : _react2.default.createElement(
+                    'h4',
+                    null,
+                    'You are not logged in'
                 )
             );
         }
@@ -24811,8 +24768,157 @@ var Home = (function (_Component) {
 })(_react.Component);
 
 exports.default = Home;
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Home);
 
-},{"react":218,"react-router":56}],233:[function(require,module,exports){
+},{"react":218,"react-redux":30,"react-router":56}],234:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _loginActions = require('../actions/loginActions');
+
+var _loginActions2 = _interopRequireDefault(_loginActions);
+
+var _userActions = require('../actions/userActions');
+
+var _userActions2 = _interopRequireDefault(_userActions);
+
+var _reactRedux = require('react-redux');
+
+var _reactRouter = require('react-router');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        loginState: state.loginState,
+        userState: state.userState
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        submit: function submit() {
+            dispatch(_userActions2.default.submitUser());
+        },
+        login: function login() {
+            dispatch(_loginActions2.default.login());
+        },
+        logout: function logout() {
+            dispatch(_loginActions2.default.logout());
+        }
+    };
+};
+
+var Submit = (function (_Component) {
+    _inherits(Submit, _Component);
+
+    function Submit() {
+        _classCallCheck(this, Submit);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Submit).apply(this, arguments));
+    }
+
+    _createClass(Submit, [{
+        key: 'handleSubmit',
+        value: function handleSubmit() {
+            this.props.userState.email = this.refs.email.value;
+            this.props.userState.password = this.refs.password.value;
+            this.props.userState.username = "Hardcoded in submit.js";
+            this.props.submit();
+
+            // TODO : Refactor login()  to some class or component that listen on submit, and then
+            //check the submitted values against hardcoded data and that class instead set login()
+            this.props.login();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    _react2.default.createElement(
+                        _reactRouter.Link,
+                        { to: '/' },
+                        'To home view'
+                    )
+                ),
+                this.props.loginState.isLoggedIn ? _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'h4',
+                        null,
+                        'Want to log out?'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this.props.logout },
+                        'Logout'
+                    )
+                ) : _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'h4',
+                        null,
+                        'Want to login?'
+                    ),
+                    _react2.default.createElement(
+                        'form',
+                        { onSubmit: function onSubmit() {
+                                return _this2.handleSubmit();
+                            } },
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            _react2.default.createElement('input', { ref: 'email', placeholder: 'email', defaultValue: 'david@example.com' })
+                        ),
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            _react2.default.createElement('input', { ref: 'password', placeholder: 'password' })
+                        ),
+                        _react2.default.createElement(
+                            'button',
+                            { type: 'submit' },
+                            'login'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Submit;
+})(_react.Component);
+
+Submit.propTypes = {
+    submit: _react.PropTypes.func.isRequired
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Submit);
+
+},{"../actions/loginActions":229,"../actions/userActions":230,"react":218,"react-redux":30,"react-router":56}],235:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24824,11 +24930,16 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function () {
     return {
-        loginState: { isLoggedIn: false }
+        loginState: { isLoggedIn: false },
+        userState: {
+            username: "Unknown",
+            email: "No fucking idea@clulesss.com",
+            password: "secret"
+        }
     };
 };
 
-},{}],234:[function(require,module,exports){
+},{}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24859,7 +24970,43 @@ var authentication = function authentication(state, action) {
 
 exports.default = authentication;
 
-},{"./../initialState":233}],235:[function(require,module,exports){
+},{"./../initialState":235}],237:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _initialState = require('./../initialState');
+
+var _initialState2 = _interopRequireDefault(_initialState);
+
+var _authenticate = require('./../components/authenticate');
+
+var _authenticate2 = _interopRequireDefault(_authenticate);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by dav on 2015-11-19.
+ */
+
+var submitUser = function submitUser(state, action) {
+    var newState = Object.assign({}, state);
+    switch (action.type) {
+        case 'submitUser':
+            newState.email = state.email;
+            newState.password = state.password;
+            newState.username = state.username;
+            return newState;
+        default:
+            return state || (0, _initialState2.default)().userState;
+    }
+};
+
+exports.default = submitUser;
+
+},{"./../components/authenticate":232,"./../initialState":235}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24878,9 +25025,9 @@ var _home = require('./components/home');
 
 var _home2 = _interopRequireDefault(_home);
 
-var _authenticate = require('./components/authenticate');
+var _submit = require('./components/submit');
 
-var _authenticate2 = _interopRequireDefault(_authenticate);
+var _submit2 = _interopRequireDefault(_submit);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24891,10 +25038,10 @@ exports.default = _react2.default.createElement(
     _reactRouter.Route,
     null,
     _react2.default.createElement(_reactRouter.Route, { path: '/', component: _home2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'auth', component: _authenticate2.default })
+    _react2.default.createElement(_reactRouter.Route, { path: 'auth', component: _submit2.default })
 );
 
-},{"./components/authenticate":231,"./components/home":232,"react":218,"react-router":56}],236:[function(require,module,exports){
+},{"./components/home":233,"./components/submit":234,"react":218,"react-router":56}],239:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24911,6 +25058,10 @@ var _authenticate = require('./reducers/authenticate');
 
 var _authenticate2 = _interopRequireDefault(_authenticate);
 
+var _submitUser = require('./reducers/submitUser');
+
+var _submitUser2 = _interopRequireDefault(_submitUser);
+
 var _reduxThunk = require('redux-thunk');
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
@@ -24918,18 +25069,19 @@ var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Hidden string dependancy on naming of object to the object name located in the initialState.
-/**
- * Store.js Created by dav on 2015-11-16.
- */
 var reducers = (0, _redux.combineReducers)({
-    loginState: _authenticate2.default
+    loginState: _authenticate2.default,
+    userState: _submitUser2.default
 });
 
 // create a store that has redux-thunk middleware enabled
+/**
+ * Store.js Created by dav on 2015-11-16.
+ */
 var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxThunk2.default)(_redux.createStore);
 
 var store = createStoreWithMiddleware(reducers, (0, _initialState2.default)());
 
 exports.default = store;
 
-},{"./initialState":233,"./reducers/authenticate":234,"redux":221,"redux-thunk":219}]},{},[230]);
+},{"./initialState":235,"./reducers/authenticate":236,"./reducers/submitUser":237,"redux":221,"redux-thunk":219}]},{},[231]);

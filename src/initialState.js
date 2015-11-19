@@ -3,6 +3,12 @@
  */
 export default () => {
     return {
-        loginState : { isLoggedIn : false }
+        loginState : { isLoggedIn : false },
+        userState: {
+            username: "Unknown",
+            email: "No fucking idea@clulesss.com",
+            password : "secret"
+        }
     }
+
 };
