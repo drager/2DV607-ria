@@ -24568,12 +24568,6 @@ exports.default = {
 };
 
 },{}],230:[function(require,module,exports){
-/**
- * Created by dav on 2015-11-19.
- */
-"use strict";
-
-},{}],231:[function(require,module,exports){
 'use strict';
 
 var _reactDom = require('react-dom');
@@ -24608,7 +24602,7 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(_reactRouter.Router, { routes: _routes2.default })
 ), document.getElementById('app'));
 
-},{"./routes":236,"./store":237,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],232:[function(require,module,exports){
+},{"./routes":235,"./store":236,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],231:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24629,10 +24623,6 @@ var _reactRedux = require('react-redux');
 
 var _reactRouter = require('react-router');
 
-var _authenticateService = require('../actions/authenticateService');
-
-var _authenticateService2 = _interopRequireDefault(_authenticateService);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24652,9 +24642,9 @@ var Authenticate = (function (_Component) {
 
     _createClass(Authenticate, [{
         key: 'handleSubmit',
-        value: function handleSubmit(event) {
-            console.log(event);
-            //event.preventDefault();
+
+        // On submit extract email and password from this.
+        value: function handleSubmit() {
             console.log(this);
             var email = this.refs.email.value;
             var pass = this.refs.password.value;
@@ -24664,6 +24654,8 @@ var Authenticate = (function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             // isLoggedIn is injected from the store and has a dependency to action.js
             var _props = this.props;
             var logout = _props.logout;
@@ -24704,7 +24696,9 @@ var Authenticate = (function (_Component) {
                     ),
                     _react2.default.createElement(
                         'form',
-                        { onSubmit: this.handleSubmit.bind(this) },
+                        { onSubmit: function onSubmit() {
+                                return _this2.handleSubmit();
+                            } },
                         _react2.default.createElement(
                             'label',
                             null,
@@ -24750,7 +24744,7 @@ var mapStateToProps = function mapStateToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(upstate, mapStateToProps)(Authenticate);
 
-},{"../actions":229,"../actions/authenticateService":230,"react":218,"react-redux":30,"react-router":56}],233:[function(require,module,exports){
+},{"../actions":229,"react":218,"react-redux":30,"react-router":56}],232:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24818,7 +24812,7 @@ var Home = (function (_Component) {
 
 exports.default = Home;
 
-},{"react":218,"react-router":56}],234:[function(require,module,exports){
+},{"react":218,"react-router":56}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24834,7 +24828,7 @@ exports.default = function () {
     };
 };
 
-},{}],235:[function(require,module,exports){
+},{}],234:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24865,7 +24859,7 @@ var authentication = function authentication(state, action) {
 
 exports.default = authentication;
 
-},{"./../initialState":234}],236:[function(require,module,exports){
+},{"./../initialState":233}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24900,7 +24894,7 @@ exports.default = _react2.default.createElement(
     _react2.default.createElement(_reactRouter.Route, { path: 'auth', component: _authenticate2.default })
 );
 
-},{"./components/authenticate":232,"./components/home":233,"react":218,"react-router":56}],237:[function(require,module,exports){
+},{"./components/authenticate":231,"./components/home":232,"react":218,"react-router":56}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24938,4 +24932,4 @@ var store = createStoreWithMiddleware(reducers, (0, _initialState2.default)());
 
 exports.default = store;
 
-},{"./initialState":234,"./reducers/authenticate":235,"redux":221,"redux-thunk":219}]},{},[231]);
+},{"./initialState":233,"./reducers/authenticate":234,"redux":221,"redux-thunk":219}]},{},[230]);

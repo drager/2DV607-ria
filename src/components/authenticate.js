@@ -10,8 +10,6 @@ class Authenticate extends Component{
       handleSubmit() {
           const email = this.refs.email.value;
           const pass = this.refs.password.value;
-          console.log(email);
-          console.log(pass);
     }
 
     render(){
@@ -28,7 +26,7 @@ class Authenticate extends Component{
                 ) : (
                     <div>
                         <h4>Want to login?</h4>
-                        <form onSubmit={this.handleSubmit.bind(this)}>
+                        <form onSubmit={ () => this.handleSubmit()}>
                             <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
                             <label><input ref="password" placeholder="password" /></label>
                             <button type="submit">login</button>
