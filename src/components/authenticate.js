@@ -3,13 +3,20 @@ import actions from '../actions'
 import { connect } from 'react-redux'
 import { Link }  from 'react-router'
 
-class Authenticate extends Component{
 
-    //Todo: implement an service class for faking auth.
+
+class Authenticate extends Component{
+    // On submit extract email and password from this.
+      handleSubmit() {
+          const email = this.refs.email.value;
+          const pass = this.refs.password.value;
+          console.log(email);
+          console.log(pass);
+    }
 
     render(){
         // isLoggedIn is injected from the store and has a dependency to action.js
-        const { login, logout, isLoggedIn } = this.props;
+        const {logout, isLoggedIn } = this.props;
         return(
             <div>
                 <p><Link to="/">To home view</Link></p>
@@ -21,9 +28,11 @@ class Authenticate extends Component{
                 ) : (
                     <div>
                         <h4>Want to login?</h4>
-                        <button onClick={login}>Login</button>
-                        <label><input ref="email" placeholder="email" defaultValue="myEmail@mail.com" /></label>
-                        <label><input ref="pass" placeholder="password" /></label>
+                        <form onSubmit={this.handleSubmit.bind(this)}>
+                            <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
+                            <label><input ref="password" placeholder="password" /></label>
+                            <button type="submit">login</button>
+                        </form>
                     </div>
                 )}
             </div>
