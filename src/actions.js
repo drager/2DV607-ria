@@ -4,7 +4,7 @@
 export default {
     login() {
         return {
-            type : 'login'
+            type: 'login'
         }
     },
     logout(){

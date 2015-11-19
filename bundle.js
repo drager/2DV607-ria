@@ -2598,7 +2598,7 @@ function wrapActionCreators(actionCreators) {
 }
 
 module.exports = exports['default'];
-},{"redux":220}],35:[function(require,module,exports){
+},{"redux":221}],35:[function(require,module,exports){
 /**
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -24011,6 +24011,24 @@ module.exports = require('./lib/React');
 'use strict';
 
 exports.__esModule = true;
+exports['default'] = thunkMiddleware;
+
+function thunkMiddleware(_ref) {
+  var dispatch = _ref.dispatch;
+  var getState = _ref.getState;
+
+  return function (next) {
+    return function (action) {
+      return typeof action === 'function' ? action(dispatch, getState) : next(action);
+    };
+  };
+}
+
+module.exports = exports['default'];
+},{}],220:[function(require,module,exports){
+'use strict';
+
+exports.__esModule = true;
 exports['default'] = createStore;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -24171,7 +24189,7 @@ function createStore(reducer, initialState) {
     replaceReducer: replaceReducer
   };
 }
-},{"./utils/isPlainObject":225}],220:[function(require,module,exports){
+},{"./utils/isPlainObject":226}],221:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -24203,7 +24221,7 @@ exports.combineReducers = _utilsCombineReducers2['default'];
 exports.bindActionCreators = _utilsBindActionCreators2['default'];
 exports.applyMiddleware = _utilsApplyMiddleware2['default'];
 exports.compose = _utilsCompose2['default'];
-},{"./createStore":219,"./utils/applyMiddleware":221,"./utils/bindActionCreators":222,"./utils/combineReducers":223,"./utils/compose":224}],221:[function(require,module,exports){
+},{"./createStore":220,"./utils/applyMiddleware":222,"./utils/bindActionCreators":223,"./utils/combineReducers":224,"./utils/compose":225}],222:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -24265,7 +24283,7 @@ function applyMiddleware() {
 }
 
 module.exports = exports['default'];
-},{"./compose":224}],222:[function(require,module,exports){
+},{"./compose":225}],223:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -24321,7 +24339,7 @@ function bindActionCreators(actionCreators, dispatch) {
 }
 
 module.exports = exports['default'];
-},{"../utils/mapValues":226}],223:[function(require,module,exports){
+},{"../utils/mapValues":227}],224:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24455,7 +24473,7 @@ function combineReducers(reducers) {
 
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"../createStore":219,"../utils/isPlainObject":225,"../utils/mapValues":226,"../utils/pick":227,"_process":1}],224:[function(require,module,exports){
+},{"../createStore":220,"../utils/isPlainObject":226,"../utils/mapValues":227,"../utils/pick":228,"_process":1}],225:[function(require,module,exports){
 /**
  * Composes single-argument functions from right to left.
  *
@@ -24481,9 +24499,9 @@ function compose() {
 }
 
 module.exports = exports["default"];
-},{}],225:[function(require,module,exports){
+},{}],226:[function(require,module,exports){
 arguments[4][31][0].apply(exports,arguments)
-},{"dup":31}],226:[function(require,module,exports){
+},{"dup":31}],227:[function(require,module,exports){
 /**
  * Applies a function to every key-value pair inside an object.
  *
@@ -24504,7 +24522,7 @@ function mapValues(obj, fn) {
 }
 
 module.exports = exports["default"];
-},{}],227:[function(require,module,exports){
+},{}],228:[function(require,module,exports){
 /**
  * Picks key-value pairs from an object where values satisfy a predicate.
  *
@@ -24527,7 +24545,7 @@ function pick(obj, fn) {
 }
 
 module.exports = exports["default"];
-},{}],228:[function(require,module,exports){
+},{}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24549,7 +24567,7 @@ exports.default = {
     }
 };
 
-},{}],229:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 'use strict';
 
 var _reactDom = require('react-dom');
@@ -24584,7 +24602,7 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(_reactRouter.Router, { routes: _routes2.default })
 ), document.getElementById('app'));
 
-},{"./routes":234,"./store":235,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],230:[function(require,module,exports){
+},{"./routes":235,"./store":236,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],231:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24711,7 +24729,7 @@ var mapStateToProps = function mapStateToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(upstate, mapStateToProps)(Authenticate);
 
-},{"../actions":228,"react":218,"react-redux":30,"react-router":56}],231:[function(require,module,exports){
+},{"../actions":229,"react":218,"react-redux":30,"react-router":56}],232:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24779,14 +24797,14 @@ var Home = (function (_Component) {
 
 exports.default = Home;
 
-},{"react":218,"react-router":56}],232:[function(require,module,exports){
+},{"react":218,"react-router":56}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 /**
- * Created by dav on 2015-11-16.
+ * initialState.js Created by dav on 2015-11-16.
  */
 
 exports.default = function () {
@@ -24795,7 +24813,7 @@ exports.default = function () {
     };
 };
 
-},{}],233:[function(require,module,exports){
+},{}],234:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24826,7 +24844,7 @@ var authentication = function authentication(state, action) {
 
 exports.default = authentication;
 
-},{"./../initialState":232}],234:[function(require,module,exports){
+},{"./../initialState":233}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24861,11 +24879,11 @@ exports.default = _react2.default.createElement(
     _react2.default.createElement(_reactRouter.Route, { path: 'auth', component: _authenticate2.default })
 );
 
-},{"./components/authenticate":230,"./components/home":231,"react":218,"react-router":56}],235:[function(require,module,exports){
+},{"./components/authenticate":231,"./components/home":232,"react":218,"react-router":56}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _redux = require('redux');
@@ -24878,17 +24896,25 @@ var _authenticate = require('./reducers/authenticate');
 
 var _authenticate2 = _interopRequireDefault(_authenticate);
 
+var _reduxThunk = require('redux-thunk');
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Hidden string dependancy on naming of object to the object name located in the initialState.
+/**
+ * Store.js Created by dav on 2015-11-16.
+ */
 var reducers = (0, _redux.combineReducers)({
-  loginState: _authenticate2.default
-}); /**
-     * Created by dav on 2015-11-16.
-     */
+    loginState: _authenticate2.default
+});
 
-var store = (0, _redux.createStore)(reducers, (0, _initialState2.default)());
+// create a store that has redux-thunk middleware enabled
+var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxThunk2.default)(_redux.createStore);
+
+var store = createStoreWithMiddleware(reducers, (0, _initialState2.default)());
 
 exports.default = store;
 
-},{"./initialState":232,"./reducers/authenticate":233,"redux":220}]},{},[229]);
+},{"./initialState":233,"./reducers/authenticate":234,"redux":221,"redux-thunk":219}]},{},[230]);
