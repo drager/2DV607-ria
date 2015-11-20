@@ -24554,6 +24554,7 @@ Object.defineProperty(exports, "__esModule", {
 /**
  * Created by dav on 2015-11-19.
  */
+
 exports.default = {
     login: function login() {
         return {
@@ -24573,18 +24574,29 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-/**
- * Created by dav on 2015-11-19.
- */
+
+var _auth = require('../utils/auth');
+
+var _auth2 = _interopRequireDefault(_auth);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
-    submitUser: function submitUser() {
+    submitUser: function submitUser(user) {
+        if ((0, _auth2.default)(user)) {
+            return {
+                type: 'successValidation'
+            };
+        }
         return {
-            type: 'submitUser'
+            type: 'failedValidation'
         };
     }
-};
+}; /**
+    * Created by dav on 2015-11-19.
+    */
 
-},{}],231:[function(require,module,exports){
+},{"../utils/auth":239}],231:[function(require,module,exports){
 'use strict';
 
 var _reactDom = require('react-dom');
@@ -24619,53 +24631,7 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(_reactRouter.Router, { routes: _routes2.default })
 ), document.getElementById('app'));
 
-},{"./routes":238,"./store":239,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],232:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _loginActions = require('../actions/loginActions');
-
-var _loginActions2 = _interopRequireDefault(_loginActions);
-
-var _reactRedux = require('react-redux');
-
-var _store = require('../store');
-
-var _store2 = _interopRequireDefault(_store);
-
-var _userActions = require('../actions/userActions');
-
-var _userActions2 = _interopRequireDefault(_userActions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//Todo implement login and logout as when submit.js make a submit, that this class check if its valid data
-
-var upstate = function upstate(state) {
-    return state.userState;
-}; /**
-    * Created by dav on 2015-11-19.
-    */
-
-var mapStateToProps = function mapStateToProps(dispatch) {
-    return {
-        login: function login() {
-            console.log("Run login");
-            dispatch(_loginActions2.default.login());
-        },
-        logout: function logout() {
-            console.log("Run logout");
-            dispatch(_loginActions2.default.logout());
-        }
-    };
-};
-
-exports.default = (0, _reactRedux.connect)(upstate, mapStateToProps);
-
-},{"../actions/loginActions":229,"../actions/userActions":230,"../store":239,"react-redux":30}],233:[function(require,module,exports){
+},{"./routes":237,"./store":238,"react":218,"react-dom":27,"react-redux":30,"react-router":56}],232:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24736,12 +24702,6 @@ var Home = (function (_Component) {
                 _react2.default.createElement(
                     'p',
                     null,
-                    'UserName : ',
-                    this.props.userState.username
-                ),
-                _react2.default.createElement(
-                    'p',
-                    null,
                     'Email : ',
                     this.props.userState.email
                 ),
@@ -24770,7 +24730,7 @@ var Home = (function (_Component) {
 exports.default = Home;
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Home);
 
-},{"react":218,"react-redux":30,"react-router":56}],234:[function(require,module,exports){
+},{"react":218,"react-redux":30,"react-router":56}],233:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -24812,11 +24772,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
-        submit: function submit() {
-            dispatch(_userActions2.default.submitUser());
-        },
-        login: function login() {
-            dispatch(_loginActions2.default.login());
+        submit: function submit(user) {
+            dispatch(_userActions2.default.submitUser(user));
         },
         logout: function logout() {
             dispatch(_loginActions2.default.logout());
@@ -24836,14 +24793,14 @@ var Submit = (function (_Component) {
     _createClass(Submit, [{
         key: 'handleSubmit',
         value: function handleSubmit() {
+            var user = {
+                email: this.refs.email.value,
+                password: this.refs.password.value
+            };
             this.props.userState.email = this.refs.email.value;
             this.props.userState.password = this.refs.password.value;
-            this.props.userState.username = "Hardcoded in submit.js";
-            this.props.submit();
 
-            // TODO : Refactor login()  to some class or component that listen on submit, and then
-            //check the submitted values against hardcoded data and that class instead set login()
-            this.props.login();
+            this.props.submit(user);
         }
     }, {
         key: 'render',
@@ -24868,7 +24825,8 @@ var Submit = (function (_Component) {
                     _react2.default.createElement(
                         'h4',
                         null,
-                        'Want to log out?'
+                        'Want to log out? user with email: ',
+                        this.props.userState.email
                     ),
                     _react2.default.createElement(
                         'button',
@@ -24884,6 +24842,11 @@ var Submit = (function (_Component) {
                         'Want to login?'
                     ),
                     _react2.default.createElement(
+                        'p',
+                        null,
+                        'to login email is fakeEmail@fakemail.com and pass is 123'
+                    ),
+                    _react2.default.createElement(
                         'form',
                         { onSubmit: function onSubmit() {
                                 return _this2.handleSubmit();
@@ -24891,7 +24854,7 @@ var Submit = (function (_Component) {
                         _react2.default.createElement(
                             'label',
                             null,
-                            _react2.default.createElement('input', { ref: 'email', placeholder: 'email', defaultValue: 'david@example.com' })
+                            _react2.default.createElement('input', { ref: 'email', placeholder: 'email', defaultValue: 'fakeEmail@fakemail.com' })
                         ),
                         _react2.default.createElement(
                             'label',
@@ -24913,12 +24876,13 @@ var Submit = (function (_Component) {
 })(_react.Component);
 
 Submit.propTypes = {
-    submit: _react.PropTypes.func.isRequired
+    submit: _react.PropTypes.func.isRequired,
+    logout: _react.PropTypes.func.isRequired
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Submit);
 
-},{"../actions/loginActions":229,"../actions/userActions":230,"react":218,"react-redux":30,"react-router":56}],235:[function(require,module,exports){
+},{"../actions/loginActions":229,"../actions/userActions":230,"react":218,"react-redux":30,"react-router":56}],234:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24932,14 +24896,13 @@ exports.default = function () {
     return {
         loginState: { isLoggedIn: false },
         userState: {
-            username: "Unknown",
             email: "No fucking idea@clulesss.com",
             password: "secret"
         }
     };
 };
 
-},{}],236:[function(require,module,exports){
+},{}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24955,7 +24918,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var authentication = function authentication(state, action) {
     var newState = Object.assign({}, state);
     switch (action.type) {
-        case 'login':
+        case 'successValidation':
             newState.isLoggedIn = true;
             return newState;
         case 'logout':
@@ -24970,7 +24933,7 @@ var authentication = function authentication(state, action) {
 
 exports.default = authentication;
 
-},{"./../initialState":235}],237:[function(require,module,exports){
+},{"./../initialState":234}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -24981,32 +24944,25 @@ var _initialState = require('./../initialState');
 
 var _initialState2 = _interopRequireDefault(_initialState);
 
-var _authenticate = require('./../components/authenticate');
-
-var _authenticate2 = _interopRequireDefault(_authenticate);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Created by dav on 2015-11-19.
- */
 
 var submitUser = function submitUser(state, action) {
     var newState = Object.assign({}, state);
     switch (action.type) {
-        case 'submitUser':
+        case 'successValidation':
             newState.email = state.email;
             newState.password = state.password;
-            newState.username = state.username;
             return newState;
         default:
             return state || (0, _initialState2.default)().userState;
     }
-};
+}; /**
+    * Created by dav on 2015-11-19.
+    */
 
 exports.default = submitUser;
 
-},{"./../components/authenticate":232,"./../initialState":235}],238:[function(require,module,exports){
+},{"./../initialState":234}],237:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25041,7 +24997,7 @@ exports.default = _react2.default.createElement(
     _react2.default.createElement(_reactRouter.Route, { path: 'auth', component: _submit2.default })
 );
 
-},{"./components/home":233,"./components/submit":234,"react":218,"react-router":56}],239:[function(require,module,exports){
+},{"./components/home":232,"./components/submit":233,"react":218,"react-router":56}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25084,4 +25040,26 @@ var store = createStoreWithMiddleware(reducers, (0, _initialState2.default)());
 
 exports.default = store;
 
-},{"./initialState":235,"./reducers/authenticate":236,"./reducers/submitUser":237,"redux":221,"redux-thunk":219}]},{},[231]);
+},{"./initialState":234,"./reducers/authenticate":235,"./reducers/submitUser":236,"redux":221,"redux-thunk":219}],239:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Created by dav on 2015-11-20.
+ */
+
+var fakeUser = {
+    email: "fakeEmail@fakemail.com",
+    password: "123"
+
+};
+
+var auth = function auth(user) {
+    return user.email == fakeUser.email && user.password == fakeUser.password;
+};
+
+exports.default = auth;
+
+},{}]},{},[231]);

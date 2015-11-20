@@ -14,11 +14,8 @@ const mapStateToProps = (state) =>  {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        submit(){
-            dispatch(userActions.submitUser())
-        },
-        login(){
-            dispatch(loginActions.login())
+        submit(user){
+            dispatch(userActions.submitUser(user))
         },
         logout(){
             dispatch(loginActions.logout())
@@ -29,14 +26,14 @@ const mapDispatchToProps = (dispatch) => {
 
 class Submit extends Component {
       handleSubmit() {
+          const user = {
+                email : this.refs.email.value,
+                password : this.refs.password.value
+          };
           this.props.userState.email = this.refs.email.value;
           this.props.userState.password = this.refs.password.value;
-          this.props.userState.username ="Hardcoded in submit.js";
-          this.props.submit();
 
-          // TODO : Refactor login()  to some class or component that listen on submit, and then
-          //check the submitted values against hardcoded data and that class instead set login()
-          this.props.login();
+          this.props.submit(user);
     }
 
     render(){
@@ -45,14 +42,15 @@ class Submit extends Component {
                 <p><Link to="/">To home view</Link></p>
                 {this.props.loginState.isLoggedIn ? (
                     <div>
-                        <h4>Want to log out?</h4>
+                        <h4>Want to log out? user with email: {this.props.userState.email}</h4>
                         <button onClick={this.props.logout}>Logout</button>
                     </div>
                 ) : (
                     <div>
                         <h4>Want to login?</h4>
+                        <p>to login email is fakeEmail@fakemail.com and pass is 123</p>
                         <form onSubmit={ () => this.handleSubmit()}>
-                            <label><input ref="email" placeholder="email" defaultValue="david@example.com" /></label>
+                            <label><input ref="email" placeholder="email" defaultValue="fakeEmail@fakemail.com" /></label>
                             <label><input ref="password" placeholder="password" /></label>
                             <button type="submit">login</button>
                         </form>
@@ -64,7 +62,8 @@ class Submit extends Component {
 }
 
 Submit.propTypes  = {
-    submit : PropTypes.func.isRequired
+    submit : PropTypes.func.isRequired,
+    logout : PropTypes.func.isRequired
 };
 
 

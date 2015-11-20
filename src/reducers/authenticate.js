@@ -5,7 +5,7 @@ import initialState from './../initialState'
 const authentication = (state, action) =>{
     const newState = Object.assign({}, state);
     switch(action.type){
-        case 'login':
+        case 'successValidation':
             newState.isLoggedIn = true;
             return newState;
         case 'logout':

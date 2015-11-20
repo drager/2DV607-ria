@@ -5,7 +5,6 @@ export default () => {
     return {
         loginState : { isLoggedIn : false },
         userState: {
-            username: "Unknown",
             email: "No fucking idea@clulesss.com",
             password : "secret"
         }

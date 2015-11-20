@@ -19,7 +19,6 @@ export default class Home extends Component {
                 <h2>Hello World!</h2>
                 <p>Todo: implement a home component</p>
                 <p><Link to="/auth">login view </Link></p>
-                <p>UserName : {this.props.userState.username}</p>
                 <p>Email : {this.props.userState.email}</p>
                 <p>Password : {this.props.userState.password}</p>
                 {this.props.loginState.isLoggedIn ? (
