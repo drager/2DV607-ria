@@ -4,7 +4,7 @@
   "description": "react project for course in react+redux",
   "main": "boundle.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline"
+    "start": "webpack-dev-server --hot"
   },
   "repository": {
     "type": "git",
