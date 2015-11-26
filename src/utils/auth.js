@@ -11,10 +11,9 @@ const fakeUser = {
 const auth = function (user) {
     return new Promise((resolve) => {
         setTimeout(() => {
-            console.log("timeout over");
-            console.log(user.email == fakeUser.email && user.password == fakeUser.password);
+            console.log("Auth responsed: "+user.email == fakeUser.email && user.password == fakeUser.password);
             resolve(user.email == fakeUser.email && user.password == fakeUser.password);
-        }, 3000);
+        }, 2000);
     });
 };
 
