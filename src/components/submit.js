@@ -14,8 +14,8 @@ const mapStateToProps = (state) =>  {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        submit(user){
-            dispatch(userActions.submitUser(user))
+        async submit(user) {
+            dispatch(await userActions.submitUser(user, dispatch));
         },
         logout(){
             dispatch(loginActions.logout())

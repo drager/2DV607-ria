@@ -9,7 +9,13 @@ const fakeUser = {
 };
 
 const auth = function (user) {
-    return user.email == fakeUser.email && user.password == fakeUser.password;
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("timeout over");
+            console.log(user.email == fakeUser.email && user.password == fakeUser.password);
+            resolve(user.email == fakeUser.email && user.password == fakeUser.password);
+        }, 3000);
+    });
 };
 
 export default auth;

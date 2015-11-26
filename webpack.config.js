@@ -1,6 +1,6 @@
 var config = {
     entry: {
-        js: './src/app.js',
+        js: ['babel-polyfill', './src/app.js'],
         html: './index.html',
     },
     output: {
@@ -15,7 +15,7 @@ var config = {
                 loaders: [
                     'react-hot',
                     'babel?' + JSON.stringify({
-                        presets: ["react", "es2015"],
+                        presets: ["react", "es2015","stage-1"],
                     })
                 ],
             },

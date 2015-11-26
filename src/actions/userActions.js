@@ -3,14 +3,15 @@
  */
 import auth from '../utils/auth'
 export default {
-    submitUser(user) {
-        if(auth(user)){
+    async submitUser(user) {
+        if(await auth(user)){
             return {
                 type: 'successValidation'
             }
-        }
-        return {
-            type : 'failedValidation'
+        } else {
+            return {
+                type : 'failedValidation'
+            }
         }
 
     }
