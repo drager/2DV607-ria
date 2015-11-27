@@ -9,9 +9,9 @@ const fakeUser = {
 };
 
 const auth = function (user) {
+    //Setting Timeout making it an asynchronous request.
     return new Promise((resolve) => {
         setTimeout(() => {
-            console.log("Auth responsed: "+user.email == fakeUser.email && user.password == fakeUser.password);
             resolve(user.email == fakeUser.email && user.password == fakeUser.password);
         }, 2000);
     });

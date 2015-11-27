@@ -9,7 +9,6 @@ import routes from './routes'
 import store from './store'
 import 'babel-polyfill'
 
-
 ReactDom.render(
 <Provider store={store}>
     <Router routes={routes}/>
