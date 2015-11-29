@@ -1,6 +1,6 @@
 import initialState from './../initialState'
 
-let submitUser = function(state = {}, action) {
+let submitUser = function(state, action) {
     const newState = Object.assign({}, state);
     switch(action.type){
         case 'successValidation':
