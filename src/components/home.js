@@ -2,10 +2,10 @@
  * Created by dav on 2015-11-16.
  */
 import React, { Component } from 'react';
-import { Link }  from 'react-router'
-import { connect } from 'react-redux'
-import Submit from './submit'
-import {Layout,Header,Navigation,Drawer,Content, Button, Card} from 'react-mdl'
+import { Link }  from 'react-router';
+import { connect } from 'react-redux';
+import Submit from './submit';
+import {Layout,Header,Navigation,Drawer,Content, Button, Card} from 'react-mdl';
 
 
 
@@ -39,11 +39,12 @@ export default class Home extends Component {
                         <Card id="submit" style={{alignItems: 'flex-start', color: '#fff', visibility:'false'}} />
                         <Submit/>
                         <p>To Login Email: "fake@fakemail.com"</p>
-                        <p>To Login password: 123"</p>
+                        <p>To Login password: 123</p>
                         </Content>
                 </Layout>
             </div>
         )
     }
 }
-export default connect( mapStateToProps)(Home)
+
+export default connect(mapStateToProps)(Home);
