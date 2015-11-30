@@ -1,9 +1,7 @@
 import React, { Component, PropTypes} from 'react'
-import loginActions from '../actions/loginActions'
 import userActions from '../actions/userActions'
 import { connect } from 'react-redux'
 import { Link, Redirect }  from 'react-router'
-
 import { Textfield, Button, IconButton, Menu, MenuItem } from 'react-mdl'
 
 const mapStateToProps = (state) =>  {
@@ -19,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(userActions.submitUser(user));
         },
         logout(){
-            dispatch(loginActions.logout())
+            dispatch(userActions.logoutUser());
         }
     }
 };
