@@ -7,9 +7,10 @@ const auth = function(user) {
       email : user.email,
       password : user.password
     }, (error, data) => {
-      error ?
-        resolve({data: error, isSuccessful: false}) :
-        resolve({data, isSuccessful: true});
+      if(error)  {
+        resolve({data: error, isSuccessful: false})
+      }
+      resolve({data, isSuccessful: true});
     });
   });
 };
