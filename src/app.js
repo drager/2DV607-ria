@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import React from 'react'
 import routes from './routes'
 import store from './store'
+import userActions from './actions/userActions';
 import 'babel-polyfill'
 
 
@@ -18,5 +19,4 @@ ReactDom.render(
     document.getElementById('app')
 );
 
-
-
+store.dispatch(userActions.listenToAuthState());

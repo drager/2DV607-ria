@@ -1,10 +1,8 @@
-import React, { Component, PropTypes} from 'react'
-import loginActions from '../actions/loginActions'
-import userActions from '../actions/userActions'
-import { connect } from 'react-redux'
-import { Link, Redirect }  from 'react-router'
-
-import { Textfield, Button, IconButton, Menu, MenuItem } from 'react-mdl'
+import React, { Component, PropTypes} from 'react';
+import userActions from '../actions/userActions';
+import { connect } from 'react-redux';
+import { Link, Redirect }  from 'react-router';
+import { Textfield, Button, IconButton, Menu, MenuItem } from 'react-mdl';
 
 const mapStateToProps = (state) =>  {
     return {
@@ -16,23 +14,22 @@ const mapStateToProps = (state) =>  {
 const mapDispatchToProps = (dispatch) => {
     return {
         submit(user) {
-            dispatch(userActions.submitUser(user));
+            dispatch(userActions.loginUser(user));
         },
         logout(){
-            dispatch(loginActions.logout())
+            dispatch(userActions.logoutUser());
         }
     }
 };
 
 class Submit extends Component {
       handleSubmit() {
-          console.log(this.refs.email);
+          console.log("ref: ", this.refs.email);
           const user = {
                 email : this.refs.email.refs.input.value,
                 password : this.refs.password.refs.input.value
           };
           this.props.submit(user);
-          this.props.userState.email = user.email;
     }
 
     render(){
@@ -49,7 +46,6 @@ class Submit extends Component {
                 ) : (
                         <form onSubmit={ () => this.handleSubmit()}>
                             <div>
-                                <MenuItem>
                                 <Textfield
                                     onChange={() => {}}
                                     label="Text..."
@@ -58,7 +54,6 @@ class Submit extends Component {
                                     placeholder="email"
 
                                 />
-                                    </MenuItem>
                                 <Textfield
                                     onChange={() => {}}
                                     label="Text..."
