@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes} from 'react'
 import loginActions from '../actions/loginActions'
 import userActions from '../actions/userActions'
 import { connect } from 'react-redux'
-import { Link }  from 'react-router'
+import { Link, Redirect }  from 'react-router'
 
+import { Textfield, Button, IconButton, Menu, MenuItem } from 'react-mdl'
 
 const mapStateToProps = (state) =>  {
     return {
@@ -25,9 +26,10 @@ const mapDispatchToProps = (dispatch) => {
 
 class Submit extends Component {
       handleSubmit() {
+          console.log(this.refs.email);
           const user = {
-                email : this.refs.email.value,
-                password : this.refs.password.value
+                email : this.refs.email.refs.input.value,
+                password : this.refs.password.refs.input.value
           };
           this.props.submit(user);
           this.props.userState.email = user.email;
@@ -35,28 +37,66 @@ class Submit extends Component {
 
     render(){
         return(
+
+
+
             <div>
-                <p><Link to="/">To home view</Link></p>
                 {this.props.loginState.isLoggedIn ? (
                     <div>
-                        <h4>Want to log out? user with email: {this.props.userState.email}</h4>
+                        <p>{this.props.userState.email}</p>
                         <button onClick={this.props.logout}>Logout</button>
                     </div>
                 ) : (
-                    <div>
-                        <h4>Want to login?</h4>
-                        <p>to login email is fakeEmail@fakemail.com and pass is 123</p>
                         <form onSubmit={ () => this.handleSubmit()}>
-                            <label><input ref="email" placeholder="email" defaultValue="fake@fakemail.com" /></label>
-                            <label><input ref="password" placeholder="password" /></label>
-                            <button type="submit">login</button>
+                            <div>
+                                <MenuItem>
+                                <Textfield
+                                    onChange={() => {}}
+                                    label="Text..."
+                                    style={{width: '200px'}}
+                                    ref="email"
+                                    placeholder="email"
+
+                                />
+                                    </MenuItem>
+                                <Textfield
+                                    onChange={() => {}}
+                                    label="Text..."
+                                    style={{width: '200px'}}
+                                    ref="password"
+                                    placeholder="Password"
+                                />
+                                <Button id="submitButton" type="submit" accent>Login</Button>
+                            </div>
                         </form>
-                    </div>
                 )}
             </div>
         );
     }
 }
+
+/*  <div>
+ <form onSubmit={ () => this.handleSubmit()}>
+ <div>
+ <Textfield
+ onChange={() => {}}
+ label="Text..."
+ style={{width: '200px'}}
+ ref="email"
+ placeholder="email"
+ />
+
+ <Textfield
+ onChange={() => {}}
+ label="Text..."
+ style={{width: '200px'}}
+ ref="password"
+ placeholder="Password"
+ />
+ <Button type="submit" accent>Login</Button>
+ </div>
+ </form>
+ </div>*/
 
 Submit.propTypes  = {
     submit : PropTypes.func.isRequired,

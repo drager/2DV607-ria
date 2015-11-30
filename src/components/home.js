@@ -5,10 +5,9 @@ import React, { Component } from 'react';
 import { Link }  from 'react-router'
 import { connect } from 'react-redux'
 import Submit from './submit'
+import {Layout,Header,Navigation,Drawer,Content, Button, Card} from 'react-mdl'
 
 
-import { AppBar, IconButton, FlatButton, LeftNav, MenuItem} from 'material-ui'
-import NavigationClose from 'material-ui/lib/svg-icons/navigation/close'
 
 
 
@@ -20,66 +19,31 @@ const mapStateToProps = (state) =>  {
 };
 
 export default class Home extends Component {
-
-
-    constructor() {
-        super();
-
-        this._handleClick = this._handleClick.bind(this);
-    }
-
-    _handleClick(e) {
-        e.preventDefault();
-        this.refs.leftNav.toggle();
-    }
-
-
     render() {
-        var menuItems = [{
-            type: MenuItem.Types.LINK,
-            payload: '#/',
-            text: 'Home'
-        }];
-        if(!this.props.loginState.isLoggedIn){
-            menuItems.push({
-                type: MenuItem.Types.LINK,
-                payload: '#/auth',
-                text: 'Login'
-            })
-        }
         return (
-            <div>
-
-                <div id="page_container">
-
-                    <LeftNav
-                        ref="leftNav"
-                        docked={false}
-                        menuItems={menuItems}>
-
-                    <Submit/>
-                </LeftNav>
-
-                    <header>
-                        <AppBar title='Portfolio under constructing.' onLeftIconButtonTouchTap={this._handleClick}
-                                isInitiallyOpen={true}
-                        />
-                    </header>
-
-                </div>
-
-                <p>Todo: implement a home component</p>
-                <p><Link to="/auth">login view </Link></p>
-                <p>Email : {this.props.userState.email}</p>
-                <p>Password : {this.props.userState.password}</p>
-                {this.props.loginState.isLoggedIn ? (
-                        <h4>You are logged in</h4>
-                ) : (
-                        <h4>You are not logged in</h4>
-                )}
+            <div style={{height: '300px', position: 'relative'}}>
+                <Layout style={{background: 'url(http://www.getmdl.io/assets/demos/transparent.jpg) center / cover'}}>
+                    <Header transparent title="Title" style={{color: 'white'}}>
+                        <Navigation>
+                            <Button onClick={() => { console.log("click") }} accent>Login</Button>
+                        </Navigation>
+                    </Header>
+                    <Drawer title="Title">
+                        <Navigation>
+                            <Link to="/">Home</Link>
+                            <a href="">Link</a>
+                            <p>dsa</p>
+                        </Navigation>
+                    </Drawer>
+                    <Content>
+                        <Card id="submit" style={{alignItems: 'flex-start', color: '#fff', visibility:'false'}} />
+                        <Submit/>
+                        <p>To Login Email: "fake@fakemail.com"</p>
+                        <p>To Login password: 123"</p>
+                        </Content>
+                </Layout>
             </div>
         )
     }
 }
-
 export default connect( mapStateToProps)(Home)

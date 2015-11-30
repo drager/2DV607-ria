@@ -24,9 +24,9 @@
   "dependencies": {
     "firebase": "^2.3.2",
     "history": "^1.13.1",
-    "material-ui": "^0.13.4",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",
+    "react-mdl": "^1.0.2",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0",
     "react-tap-event-plugin": "^0.2.1",
