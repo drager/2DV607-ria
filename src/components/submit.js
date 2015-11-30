@@ -23,7 +23,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-
 class Submit extends Component {
       handleSubmit() {
           const user = {
@@ -31,6 +30,7 @@ class Submit extends Component {
                 password : this.refs.password.value
           };
           this.props.submit(user);
+          this.props.userState.email = user.email;
     }
 
     render(){
@@ -47,7 +47,7 @@ class Submit extends Component {
                         <h4>Want to login?</h4>
                         <p>to login email is fakeEmail@fakemail.com and pass is 123</p>
                         <form onSubmit={ () => this.handleSubmit()}>
-                            <label><input ref="email" placeholder="email" defaultValue="fakeEmail@fakemail.com" /></label>
+                            <label><input ref="email" placeholder="email" defaultValue="fake@fakemail.com" /></label>
                             <label><input ref="password" placeholder="password" /></label>
                             <button type="submit">login</button>
                         </form>

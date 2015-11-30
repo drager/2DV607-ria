@@ -1,5 +1,5 @@
 const fakeUser = {
-    email : "fakeEmail@fakemail.com",
+    email : "fake@fakemail.com",
     password : "123"
 
 };
