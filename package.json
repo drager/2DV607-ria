@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Grenmyr/2DV607-ria#readme",
   "dependencies": {
+    "firebase": "^2.3.2",
     "history": "^1.13.1",
     "material-ui": "^0.13.4",
     "react": "^0.14.2",
