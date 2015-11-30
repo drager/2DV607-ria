@@ -1,6 +1,3 @@
-/**
- * Created by dav on 2015-11-16.
- */
 import initialState from './../initialState'
 const authentication = (state, action) =>{
     const newState = Object.assign({}, state);

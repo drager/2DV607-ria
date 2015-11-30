@@ -2,12 +2,11 @@
  * initialState.js Created by dav on 2015-11-16.
  */
 export default () => {
-    return {
-        loginState : { isLoggedIn : false },
-        userState: {
-            email: "No fucking idea@clulesss.com",
-            password : "secret"
-        }
-    }
-
+  return {
+      loginState : { isLoggedIn : false },
+      userState: {
+          email: "No fucking idea@clulesss.com",
+          password : "secret"
+      }
+  }
 };

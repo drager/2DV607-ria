@@ -14,8 +14,8 @@ const mapStateToProps = (state) =>  {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        async submit(user) {
-            dispatch(await userActions.submitUser(user, dispatch));
+        submit(user) {
+            dispatch(userActions.submitUser(user));
         },
         logout(){
             dispatch(loginActions.logout())
@@ -30,9 +30,6 @@ class Submit extends Component {
                 email : this.refs.email.value,
                 password : this.refs.password.value
           };
-          this.props.userState.email = this.refs.email.value;
-          this.props.userState.password = this.refs.password.value;
-
           this.props.submit(user);
     }
 
@@ -57,7 +54,7 @@ class Submit extends Component {
                     </div>
                 )}
             </div>
-        )
+        );
     }
 }
 
@@ -66,6 +63,4 @@ Submit.propTypes  = {
     logout : PropTypes.func.isRequired
 };
 
-
-
-export default connect( mapStateToProps, mapDispatchToProps)(Submit)
+export default connect( mapStateToProps, mapDispatchToProps)(Submit);
