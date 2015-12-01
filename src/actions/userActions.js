@@ -8,7 +8,7 @@ const auth = function(user) {
       password : user.password
     }, (error, data) => {
       if(error)  {
-        resolve({data: error, isSuccessful: false});
+        reject({data: error, isSuccessful: false});
       }
       resolve({data, isSuccessful: true});
     });
@@ -49,7 +49,7 @@ export default {
 
   logoutUser() {
     return async (dispatch) => {
-      dispatch({type: 'LOGOUT'})
+      dispatch({type: 'LOGOUT'});
       fireBaseRef.unauth();
     }
   }

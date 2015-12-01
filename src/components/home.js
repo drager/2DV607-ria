@@ -25,14 +25,19 @@ export default class Home extends Component {
                 <Layout style={{background: 'url(http://www.getmdl.io/assets/demos/transparent.jpg) center / cover'}}>
                     <Header transparent title="Title" style={{color: 'white'}}>
                         <Navigation>
+                            {this.props.loginState.isLoggedIn ? (
+                                <Link to="/auth">Logout</Link>
+                            ) : (
                             <Link to="/auth">Login</Link>
+                            )}
                         </Navigation>
                     </Header>
-                    <Drawer title="Title">
+                    <Drawer title="Portfolio Contents">
                         <Navigation>
                             <Link to="/">Home</Link>
                             <Link to="/auth">Login</Link>
                             <Link to="/notImplemented">About me</Link>
+                            <Link to="/notImplemented">Add to portfolio</Link>
                         </Navigation>
                     </Drawer>
                     <Content>

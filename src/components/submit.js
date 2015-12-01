@@ -1,8 +1,9 @@
 import React, { Component, PropTypes} from 'react';
 import userActions from '../actions/userActions';
 import { connect } from 'react-redux';
-import { Link, Redirect }  from 'react-router';
-import { Textfield, Button, IconButton, Menu, MenuItem,Card,CardTitle,CardText,CardActions } from 'react-mdl';
+import { Link, Redirect, IndexRedirect }  from 'react-router';
+import { Textfield, Button, Card, CardTitle, CardText, CardActions } from 'react-mdl';
+import Home from './home'
 
 const mapStateToProps = (state) =>  {
     return {
@@ -14,17 +15,21 @@ const mapStateToProps = (state) =>  {
 const mapDispatchToProps = (dispatch) => {
     return {
         submit(user) {
-            dispatch(userActions.loginUser(user));
+            dispatch(userActions.loginUser(user))
+                .then( ()  => {
+                console.log("implement redirect")
+            })
+                .catch(bbb => console.log(bbb))
         },
         logout(){
-            dispatch(userActions.logoutUser());
+            dispatch(userActions.logoutUser())
+
         }
     }
 };
 
 class Submit extends Component {
       handleSubmit() {
-          console.log("ref: ", this.refs.email);
           const user = {
                 email : this.refs.email.refs.input.value,
                 password : this.refs.password.refs.input.value
@@ -38,18 +43,24 @@ class Submit extends Component {
             <div>
                 {this.props.loginState.isLoggedIn ? (
                     <div>
-                        <p>{this.props.userState.email}</p>
-                        <Button onClick={this.props.logout}>Logout</Button>
+                        <Card shadow={0} style={{width: '320px', height: '320px', margin: 'auto'}}>
+                            <CardTitle expand style={{color: 'Black', background: 'url(http://www.getmdl.io/assets/demos/dog.png) bottom right 15% no-repeat #46B6AC'}}>Logout: {this.props.userState.email} ?</CardTitle>
+                            <CardText>
+                                <Button accent style={ { float : 'left'}} onClick={ () => console.log("Implement somehow so component close.") }>No I rather stay</Button>
+                                <Button primary style={ { float : 'right'}} onClick={this.props.logout}>Logout</Button>
+                            </CardText>
+                        </Card>
+
                     </div>
                 ) : (
                 <div>
                     <Card shadow={0} style={{width: '320px', height: '320px', margin: 'auto'}}>
-                        <CardTitle expand style={{color: '#fff', background: 'url(http://www.getmdl.io/assets/demos/dog.png) bottom right 15% no-repeat #46B6AC'}}>Update</CardTitle>
+                        <CardTitle expand style={{color: 'Black', background: 'url(http://www.getmdl.io/assets/demos/dog.png) bottom right 15% no-repeat #46B6AC'}}>Email:fake@fakemail.com, Hint: Pass: 123</CardTitle>
                         <CardText>
                             <form onSubmit={ () => this.handleSubmit()}>
                                 <Textfield
                                     onChange={() => {}}
-                                    label="Text..."
+                                    label="Email..."
                                     style={{width: '200px'}}
                                     ref="email"
 
@@ -60,7 +71,7 @@ class Submit extends Component {
                                     style={{width: '200px'}}
                                     ref="password"
                                 />
-                                <Button type="submit">Login</Button>
+                                <Button primary type="submit">Login</Button>
                             </form>
                         </CardText>
                     </Card>
