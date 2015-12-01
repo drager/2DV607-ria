@@ -32,7 +32,7 @@ export class Login extends Component {
                                 style={{width: '200px'}}
                                 ref="password"
                             />
-                            <Button primary type="submit">Login</Button>
+                            <Button type="submit">Login</Button>
                         </form>
                     </CardText>
                 </Card>
@@ -49,6 +49,8 @@ export class Login extends Component {
     }
 }
 
+
 Login.propTypes = {
     login: PropTypes.func.isRequired
 };
+

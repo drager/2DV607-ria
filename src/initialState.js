@@ -7,6 +7,9 @@ export default () => {
         userState: {
             email: "youAreNotLoggedIn@clulesss.com",
             password: "secret"
+        },
+        spinner: {
+            spinning: false
         }
     }
 };

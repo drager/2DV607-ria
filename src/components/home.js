@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Link }  from 'react-router';
 import { connect } from 'react-redux';
 import { Layout, Header, Navigation, Drawer, Content, Button, Card } from 'react-mdl';
+import Spinner from './spinner';
 
 const mapStateToProps = (state) => {
     return {
@@ -14,12 +15,14 @@ const mapStateToProps = (state) => {
 };
 
 export default class Home extends Component {
+
     render() {
         return (
             <div style={{height: '500px', position: 'relative'}}>
                 <Layout style={{background: 'url(http://www.getmdl.io/assets/demos/transparent.jpg) center / cover'}}>
                     <Header transparent title="Title" style={{color: 'white'}}>
                         <Navigation>
+
                             {this.props.loginState.isLoggedIn ? (
                                 <Link to="/auth">Logout</Link>
                             ) : (
@@ -36,6 +39,7 @@ export default class Home extends Component {
                         </Navigation>
                     </Drawer>
                     <Content>
+                        <Spinner/>
                         {this.props.children}
                     </Content>
                 </Layout>
