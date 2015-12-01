@@ -1,13 +1,13 @@
 import Firebase from 'firebase';
-let fireBaseRef = new Firebase('portfoliodavidg.firebaseIO.com');
+const fireBaseRef = new Firebase('portfoliodavidg.firebaseIO.com');
 
-const auth = function(user) {
+const auth = (user) => {
   return new Promise((resolve, reject) => {
     fireBaseRef.authWithPassword({
-      email : user.email,
-      password : user.password
+      email: user.email,
+      password: user.password
     }, (error, data) => {
-      if(error)  {
+      if (error) {
         reject({data: error, isSuccessful: false});
       }
       resolve({data, isSuccessful: true});
@@ -36,7 +36,7 @@ export default {
   loginUser(user) {
     return async (dispatch) => {
       let validation = await auth(user);
-      if(validation.isSuccessful){
+      if (validation.isSuccessful) {
         let email = validation.data.password.email;
         dispatch({type: 'LOGIN'});
         dispatch({type: 'SET_LOGIN_USER', email});
