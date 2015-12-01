@@ -11,14 +11,14 @@ And repository is here: [app:master](https://github.com/Grenmyr/HelloWorldReact/
 If you just want to take a look on application i recommend clone it.
 
 Then 
-1: navigate to root:
-2: npm install
-3: npm run start
-4: open browser localhost:8080
+1: navigate to root:   
+2: npm install   
+3: npm run start   
+4: open browser localhost:8080   
 
 #### Feel free to contribute if you like!
 Then fork repo and submit a pullrequest when done with changes.
-1: navigate to root:
-2: npm install
-3: npm run start
-4: open browser localhost:8080
+1: navigate to root:   
+2: npm install   
+3: npm run start     
+4: open browser localhost:8080   
