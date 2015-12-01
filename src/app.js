@@ -10,8 +10,6 @@ import store from './store'
 import userActions from './actions/userActions';
 import 'babel-polyfill'
 
-
-
 ReactDom.render(
 <Provider store={store}>
     <Router routes={routes}/>

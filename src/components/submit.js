@@ -1,9 +1,10 @@
 import React, { Component, PropTypes} from 'react';
 import userActions from '../actions/userActions';
 import { connect } from 'react-redux';
-import { Link, Redirect, IndexRedirect }  from 'react-router';
+import { Link, Navigation }  from 'react-router';
 import { Textfield, Button, Card, CardTitle, CardText, CardActions } from 'react-mdl';
 import Home from './home'
+
 
 const mapStateToProps = (state) =>  {
     return {
@@ -17,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
         submit(user) {
             dispatch(userActions.loginUser(user))
                 .then( ()  => {
-                console.log("implement redirect")
+                    console.log("go to home view again")
             })
                 .catch(bbb => console.log(bbb))
         },
@@ -31,10 +32,14 @@ const mapDispatchToProps = (dispatch) => {
 class Submit extends Component {
       handleSubmit() {
           const user = {
-                email : this.refs.email.refs.input.value,
-                password : this.refs.password.refs.input.value
+              email: this.refs.email.refs.input.value,
+              password: this.refs.password.refs.input.value
           };
           this.props.submit(user);
+      }
+
+     redirect (){
+        this.props.history.pushState(null, '/');
     }
 
     render(){
@@ -46,7 +51,7 @@ class Submit extends Component {
                         <Card shadow={0} style={{width: '320px', height: '320px', margin: 'auto'}}>
                             <CardTitle expand style={{color: 'Black', background: 'url(http://www.getmdl.io/assets/demos/dog.png) bottom right 15% no-repeat #46B6AC'}}>Logout: {this.props.userState.email} ?</CardTitle>
                             <CardText>
-                                <Button accent style={ { float : 'left'}} onClick={ () => console.log("Implement somehow so component close.") }>No I rather stay</Button>
+                                <Button accent style={ { float : 'left'}} onClick={ () => this.redirect() }>No I rather stay</Button>
                                 <Button primary style={ { float : 'right'}} onClick={this.props.logout}>Logout</Button>
                             </CardText>
                         </Card>
