@@ -8,8 +8,9 @@ import Submit from './components/submit'
 
 export default (
     <Route>
-        <Route path="/" component={Home}/>
-        <Route path="auth" component={Submit}/>
+        <Route path="/" component={Home}>
+            <Route path="auth" component={Submit}/>
+        </Route>
     </Route>
 );
 

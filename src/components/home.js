@@ -21,25 +21,22 @@ const mapStateToProps = (state) =>  {
 export default class Home extends Component {
     render() {
         return (
-            <div style={{height: '300px', position: 'relative'}}>
+            <div style={{height: '500px', position: 'relative'}}>
                 <Layout style={{background: 'url(http://www.getmdl.io/assets/demos/transparent.jpg) center / cover'}}>
                     <Header transparent title="Title" style={{color: 'white'}}>
                         <Navigation>
-                            <Button onClick={() => { console.log("click") }} accent>Login</Button>
+                            <Link to="/auth">Login</Link>
                         </Navigation>
                     </Header>
                     <Drawer title="Title">
                         <Navigation>
                             <Link to="/">Home</Link>
-                            <a href="">Link</a>
-                            <p>dsa</p>
+                            <Link to="/auth">Login</Link>
+                            <Link to="/notImplemented">About me</Link>
                         </Navigation>
                     </Drawer>
                     <Content>
-                        <Card id="submit" style={{alignItems: 'flex-start', color: '#fff', visibility:'false'}} />
-                        <Submit/>
-                        <p>To Login Email: "fake@fakemail.com"</p>
-                        <p>To Login password: 123</p>
+                        {this.props.children}
                         </Content>
                 </Layout>
             </div>

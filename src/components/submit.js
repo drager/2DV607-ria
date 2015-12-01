@@ -2,7 +2,7 @@ import React, { Component, PropTypes} from 'react';
 import userActions from '../actions/userActions';
 import { connect } from 'react-redux';
 import { Link, Redirect }  from 'react-router';
-import { Textfield, Button, IconButton, Menu, MenuItem } from 'react-mdl';
+import { Textfield, Button, IconButton, Menu, MenuItem,Card,CardTitle,CardText,CardActions } from 'react-mdl';
 
 const mapStateToProps = (state) =>  {
     return {
@@ -35,64 +35,41 @@ class Submit extends Component {
     render(){
         return(
 
-
-
             <div>
                 {this.props.loginState.isLoggedIn ? (
                     <div>
                         <p>{this.props.userState.email}</p>
-                        <button onClick={this.props.logout}>Logout</button>
+                        <Button onClick={this.props.logout}>Logout</Button>
                     </div>
                 ) : (
-                        <form onSubmit={ () => this.handleSubmit()}>
-                            <div>
+                <div>
+                    <Card shadow={0} style={{width: '320px', height: '320px', margin: 'auto'}}>
+                        <CardTitle expand style={{color: '#fff', background: 'url(http://www.getmdl.io/assets/demos/dog.png) bottom right 15% no-repeat #46B6AC'}}>Update</CardTitle>
+                        <CardText>
+                            <form onSubmit={ () => this.handleSubmit()}>
                                 <Textfield
                                     onChange={() => {}}
                                     label="Text..."
                                     style={{width: '200px'}}
                                     ref="email"
-                                    placeholder="email"
 
                                 />
                                 <Textfield
                                     onChange={() => {}}
-                                    label="Text..."
+                                    label="Password..."
                                     style={{width: '200px'}}
                                     ref="password"
-                                    placeholder="Password"
                                 />
-                                <Button id="submitButton" type="submit" accent>Login</Button>
-                            </div>
-                        </form>
+                                <Button type="submit">Login</Button>
+                            </form>
+                        </CardText>
+                    </Card>
+                </div>
                 )}
             </div>
         );
     }
 }
-
-/*  <div>
- <form onSubmit={ () => this.handleSubmit()}>
- <div>
- <Textfield
- onChange={() => {}}
- label="Text..."
- style={{width: '200px'}}
- ref="email"
- placeholder="email"
- />
-
- <Textfield
- onChange={() => {}}
- label="Text..."
- style={{width: '200px'}}
- ref="password"
- placeholder="Password"
- />
- <Button type="submit" accent>Login</Button>
- </div>
- </form>
- </div>*/
-
 Submit.propTypes  = {
     submit : PropTypes.func.isRequired,
     logout : PropTypes.func.isRequired
