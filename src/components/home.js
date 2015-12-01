@@ -4,12 +4,7 @@
 import React, { Component } from 'react';
 import { Link }  from 'react-router';
 import { connect } from 'react-redux';
-import Submit from './submit';
-import {Layout,Header,Navigation,Drawer,Content, Button, Card} from 'react-mdl';
-
-
-
-
+import { Layout, Header, Navigation, Drawer, Content, Button, Card } from 'react-mdl';
 
 const mapStateToProps = (state) =>  {
     return {
