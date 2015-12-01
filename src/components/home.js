@@ -6,10 +6,10 @@ import { Link }  from 'react-router';
 import { connect } from 'react-redux';
 import { Layout, Header, Navigation, Drawer, Content, Button, Card } from 'react-mdl';
 
-const mapStateToProps = (state) =>  {
+const mapStateToProps = (state) => {
     return {
-        loginState : state.loginState,
-        userState : state.userState
+        loginState: state.loginState,
+        userState: state.userState
     }
 };
 
@@ -23,7 +23,7 @@ export default class Home extends Component {
                             {this.props.loginState.isLoggedIn ? (
                                 <Link to="/auth">Logout</Link>
                             ) : (
-                            <Link to="/auth">Login</Link>
+                                <Link to="/auth">Login</Link>
                             )}
                         </Navigation>
                     </Header>
@@ -37,7 +37,7 @@ export default class Home extends Component {
                     </Drawer>
                     <Content>
                         {this.props.children}
-                        </Content>
+                    </Content>
                 </Layout>
             </div>
         )

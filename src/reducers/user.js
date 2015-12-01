@@ -2,7 +2,7 @@ import initialState from './../initialState';
 
 const user = (state, action) => {
     const newState = Object.assign({}, state);
-    switch(action.type){
+    switch (action.type) {
         case 'SET_LOGIN_USER':
             newState.email = action.email;
             newState.password = state.password;
