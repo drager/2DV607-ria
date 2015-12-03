@@ -3,7 +3,7 @@ import userActions from '../../actions/userActions';
 import { connect } from 'react-redux';
 import { Login } from './login';
 import { Logout } from './logout';
-import { immediateDebounce } from '../utils/debouncer';
+import { immediateDebounce } from '../../utils/debouncer';
 
 class Auth extends Component {
     render() {
