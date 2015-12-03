@@ -9,16 +9,16 @@
  */
 import React, {Component} from 'react'
 import {Grid} from 'react-mdl'
-import Cell4Col from './cell4col'
+import PortfolioCells from './portfolioCells'
 
-export class Portfolio extends Component {
+export class PortfolioGrid extends Component {
     render(){
         return (
             <div style={{ margin: '0 auto', display: "flex",  flexDirection: "row", alignItems: "center" }}>
                 <Grid>
-                    <Cell4Col/>
-                    <Cell4Col/>
-                    <Cell4Col/>
+                    <PortfolioCells/>
+                    <PortfolioCells/>
+                    <PortfolioCells/>
                 </Grid>
             </div>
         )

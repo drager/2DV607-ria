@@ -7,12 +7,12 @@ import Home from './components/home';
 import Auth from './components/auth/auth';
 import {About} from './components/about';
 import {Contact} from './components/contact';
-import {Portfolio} from './components/grid';
+import {PortfolioGrid} from './components/portfolio/portfolioGrid';
 
 export default (
     <Route>
         <Route path="/" component={Home}>
-            <Route path="portfolio" component={Portfolio}/>
+            <Route path="portfolio" component={PortfolioGrid}/>
             <Route path="auth" component={Auth}/>
             <Route path="about" component={About}/>
             <Route path="contact" component={Contact}/>
