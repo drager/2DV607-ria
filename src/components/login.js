@@ -1,5 +1,4 @@
 import React, { Component, PropTypes} from 'react';
-import userActions from '../actions/userActions';
 import {
     Textfield,
     Button,
@@ -19,7 +18,7 @@ export class Login extends Component {
                                style={{color: 'Black', background: 'url(http://www.getmdl.io/assets/demos/dog.png) bottom right 15% no-repeat #46B6AC'}}>Email:fake@fakemail.com,
                         Hint: Pass: 123</CardTitle>
                     <CardText>
-                        <form onSubmit={() => this.handleSubmit()}>
+                        <form onSubmit={() => this.props.login(this.refs)}>
                             <Textfield
                                 onChange={() => {}}
                                 label="Email..."
@@ -39,18 +38,9 @@ export class Login extends Component {
             </div>
         )
     }
-
-    handleSubmit() {
-        const user = {
-            email: this.refs.email.refs.input.value,
-            password: this.refs.password.refs.input.value
-        };
-        this.props.login(user);
-    }
 }
 
 
 Login.propTypes = {
     login: PropTypes.func.isRequired
 };
-
