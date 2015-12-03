@@ -1,5 +1,7 @@
 import Firebase from 'firebase';
 const fireBaseRef = new Firebase('portfoliodavidg.firebaseIO.com');
+import history from './../utils/history'
+
 
 const auth = (user) => {
     return new Promise((resolve, reject) => {
@@ -42,6 +44,9 @@ export default {
                 dispatch({type: 'LOGIN'});
                 dispatch({type: 'SET_LOGIN_USER', email});
                 dispatch({type: 'STOP_SPINNER'});
+                history.pushState(null, '/');
+                history.go('/');
+
             } else {
                 console.log('not authenticated');
                 dispatch({type: 'FAILED_VALIDATION'});
