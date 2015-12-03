@@ -6,12 +6,14 @@ import Router, { IndexRoute, Route } from 'react-router';
 import Home from './components/home';
 import Auth from './components/auth/auth';
 import {About} from './components/about';
+import {Contact} from './components/contact';
 
 export default (
     <Route>
         <Route path="/" component={Home}>
             <Route path="auth" component={Auth}/>
             <Route path="about" component={About}/>
+            <Route path="contact" component={Contact}/>
         </Route>
     </Route>
 );

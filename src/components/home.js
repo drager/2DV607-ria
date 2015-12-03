@@ -35,7 +35,7 @@ export default class Home extends Component {
                             <Link to="/">Home</Link>
                             <Link to="/auth">Login</Link>
                             <Link to="/about">About me</Link>
-                            <Link to="/notImplemented">Add to portfolio</Link>
+                            <Link to="/contact">Contact me</Link>
                         </Navigation>
                     </Drawer>
                     <Content>
