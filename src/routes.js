@@ -5,11 +5,13 @@ import React from 'react';
 import Router, { IndexRoute, Route } from 'react-router';
 import Home from './components/home';
 import Auth from './components/auth/auth';
+import {About} from './components/about';
 
 export default (
     <Route>
         <Route path="/" component={Home}>
             <Route path="auth" component={Auth}/>
+            <Route path="about" component={About}/>
         </Route>
     </Route>
 );
