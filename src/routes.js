@@ -4,7 +4,7 @@
 import React from 'react';
 import Router, { IndexRoute, Route } from 'react-router';
 import Home from './components/home';
-import Auth from './components/auth';
+import Auth from './components/auth/auth';
 
 export default (
     <Route>

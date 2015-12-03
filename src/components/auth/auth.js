@@ -1,5 +1,5 @@
 import React, { Component, PropTypes} from 'react';
-import userActions from '../actions/userActions';
+import userActions from '../../actions/userActions';
 import { connect } from 'react-redux';
 import { Login } from './login';
 import { Logout } from './logout';
