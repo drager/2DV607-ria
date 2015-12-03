@@ -3,13 +3,14 @@ import userActions from '../../actions/userActions';
 import { connect } from 'react-redux';
 import { Login } from './login';
 import { Logout } from './logout';
+import { immediateDebounce } from '../utils/debouncer';
 
 class Auth extends Component {
     render() {
         if (this.props.loginState.isLoggedIn) {
             return <Logout userState={this.props.userState} logout={this.props.logout}/>;
         } else {
-            return <Login login={(refs) => {
+            return <Login login={immediateDebounce(1000, (refs) => {
               if (refs.email.refs) {
                 const user = {
                     email: refs.email.refs.input.value,
@@ -17,7 +18,8 @@ class Auth extends Component {
                 };
                 this.props.login(user);
               }
-            }}/>;
+            })
+          }/>;
         }
     }
 }
