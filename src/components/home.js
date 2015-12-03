@@ -30,12 +30,13 @@ export default class Home extends Component {
                             )}
                         </Navigation>
                     </Header>
-                    <Drawer title="Portfolio Contents">
+                    <Drawer title="Content">
                         <Navigation>
                             <Link to="/">Home</Link>
                             <Link to="/auth">Login</Link>
                             <Link to="/about">About me</Link>
                             <Link to="/contact">Contact me</Link>
+                            <Link to="/portfolio">Portfolio</Link>
                         </Navigation>
                     </Drawer>
                     <Content>
