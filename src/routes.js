@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import Router, { IndexRoute, Route } from 'react-router';
+import Wrapper from './components/wrapper';
 import Home from './components/home';
 import Auth from './components/auth/auth';
 import {About} from './components/about';
@@ -11,7 +12,8 @@ import {PortfolioGrid} from './components/portfolio/portfolioGrid';
 
 export default (
     <Route>
-        <Route path="/" component={Home}>
+        <Route path="/" component={Wrapper}>
+        	<IndexRoute component={Home}/>
             <Route path="portfolio" component={PortfolioGrid}/>
             <Route path="auth" component={Auth}/>
             <Route path="about" component={About}/>
