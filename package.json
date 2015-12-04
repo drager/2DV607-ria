@@ -5,7 +5,7 @@
   "main": "boundle.js",
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
-    "publish": "webpack ./src/app.js bundle.js"
+    "publish": "webpack --progress --colors"
   },
   "repository": {
     "type": "git",
