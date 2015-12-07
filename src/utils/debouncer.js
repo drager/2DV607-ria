@@ -2,18 +2,18 @@ import R from 'ramda';
 
 const debounce = R.curry((immediate, wait, callback) => {
   let timeout; // remembered by the returned function via the closure.
-  return (e, refs) => {
+  return (refs) => {
     // later is passed as a callback to the setTimeout.
-    let later = () => {
+    const later = () => {
       timeout = null;
       if (!immediate) {
-        callback(e, refs);
+        callback(refs);
       };
     };
 
     // Alt 1 (immediate: true): If clicked once timeout is FALSE and immediate is TRUE (constant), hence callImmediately is TRUE.
     // Alt 2 (immediate: false): If clicked once timeout is FALSE and immediate is FALSE (konstant), hence callImmediately is FALSE.
-    let callImmediately = immediate && !timeout;
+    const callImmediately = immediate && !timeout;
 
     clearTimeout(timeout);
 
@@ -35,7 +35,7 @@ const debounce = R.curry((immediate, wait, callback) => {
     timeout = setTimeout(later, wait);
 
     if (callImmediately) {
-      callback(e, refs);
+      callback(refs);
     };
   };
 });
