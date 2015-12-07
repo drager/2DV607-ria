@@ -2,12 +2,12 @@ import R from 'ramda';
 
 const debounce = R.curry((immediate, wait, callback) => {
   let timeout; // remembered by the returned function via the closure.
-  return (e) => {
+  return (e, refs) => {
     // later is passed as a callback to the setTimeout.
     let later = () => {
       timeout = null;
       if (!immediate) {
-        callback(e);
+        callback(e, refs);
       };
     };
 
@@ -35,7 +35,7 @@ const debounce = R.curry((immediate, wait, callback) => {
     timeout = setTimeout(later, wait);
 
     if (callImmediately) {
-      callback(e);
+      callback(e, refs);
     };
   };
 });

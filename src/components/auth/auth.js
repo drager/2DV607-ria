@@ -10,7 +10,8 @@ class Auth extends Component {
         if (this.props.loginState.isLoggedIn) {
             return <Logout userState={this.props.userState} logout={this.props.logout}/>;
         } else {
-            return <Login loginOnClick={immediateDebounce(1000, (refs) => {
+            return <Login loginOnClick={immediateDebounce(1000, (e, refs) => {
+              e.preventDefault();
               if (refs.email.refs) {
                 const user = {
                     email: refs.email.refs.input.value,

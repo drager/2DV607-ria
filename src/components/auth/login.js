@@ -18,7 +18,7 @@ export class Login extends Component {
                                style={{color: 'Black', background: 'url(http://www.getmdl.io/assets/demos/dog.png) bottom right 15% no-repeat #46B6AC'}}>Email:fake@fakemail.com,
                         Hint: Pass: 123</CardTitle>
                     <CardText>
-                        <form onSubmit={() => this.props.loginOnClick(this.refs)}>
+                        <form onSubmit={(e) => this.props.loginOnClick(e, this.refs)}>
                             <Textfield
                                 onChange={() => {}}
                                 label="Email..."
